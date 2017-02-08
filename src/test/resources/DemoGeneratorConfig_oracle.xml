@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<properties resource="DemoGeneratorConfig_oracle.properties" />
+
+	<classPathEntry location="${jdbc.path}" />
+
+	<context id="tryByGY" targetRuntime="MyBatis3" defaultModelType="flat">
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+
+		<commentGenerator type="plugins.oracle.CommentPlugin">
+			<property name="suppressDate" value="true" />
+			<!--去除自动生成注释 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="${jdbc.driverClassName}"
+			connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.doit.pojo"
+			targetProject="tryByGY/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.doit.sqlmap"
+			targetProject="tryByGY/src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetProject="tryByGY" targetPackage="com.doit.mapper">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+			<table schema="SYSTEM" tableName="account" domainObjectName="account">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="true" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		<table schema="SYSTEM" tableName="trade" domainObjectName="trade">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="true" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+	</context>
+</generatorConfiguration>

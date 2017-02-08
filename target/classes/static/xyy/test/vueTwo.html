@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>VueJS组件部分知识</title>
+<script type="text/javascript" src="../../../vue.js"></script>
+</head>
+<body>
+<!-- 用组件构建应用 -->
+	<!-- 全局注册组件 -->
+<ul id="todo-item-1">
+  <todo-item></todo-item>
+</ul>
+  <todo-item2></todo-item2>
+<!-- 局部注册 -->
+<div id="two">
+<my-component></my-component>
+</div>
+<div id="num3">
+<component1></component1>
+</div>
+<!-- 父子组件 -->
+<!-- 注意:template下只可以有一个元素，若有多个元素，需要一个元素进行包装.例如: <div><a><...></a></div> -->
+<template id='parent'>
+<div>
+ <input v-model="parentMsg">
+  <input v-model="oldage">
+  <br>
+<span style="color: green">我是爷爷,我姓{{parentMsg}},请叫我老{{parentMsg}},我今年{{oldage}}岁</span>
+<child1 :Msg="parentMsg" :oldage="oldage"></child1>
+<child2></child2>
+</div>
+</template>
+
+<template id='child1'>
+<div>
+  <span style="color: red">我是大儿子,我爸姓{{Msg}},我今年{{age}}岁</span>
+  <sunzi v-bind:Xi="Msg" :oldage="oldage"></sunzi>
+</div>
+</template>
+
+<template id='child2'>
+  <span style="color: blue">我是二儿子</span>
+</template>
+
+<template id='sunzi'>
+  <span style='color: yellow'>我是大儿子的儿子,也就是孙子,我叫{{Xi}}小明,我今年{{newage}}岁</span>
+</template>
+
+<div id="num4">
+<parent></parent>
+</div>
+</body>
+<script type="text/javascript">
+
+var child1=Vue.component('child1', {
+	  template: '#child1',
+	  props: ['Msg','oldage'],
+	  computed: {
+		  age: function () {
+		    return this.oldage-20
+		  }
+		},
+	  components: {
+		  'sunzi': {
+			  template: '#sunzi',
+			  props: {'Xi': String,
+				      'oldage': Number},
+				// 声明 props
+			  computed: {
+				  newage: function () {
+				    return this.oldage-40
+				  }
+				},
+			 },
+	  }
+	});
+var child2=Vue.component('child2', {
+	  template: '#child2',
+	});
+Vue.component('parent', {
+	  template: '#parent',
+	  data: function(){
+		  return {parentMsg: '谷',oldage: 60}
+	  },
+	  components: {
+		  'child1': child1,
+		  'child2': child2,
+	  }
+	});
+new Vue({
+	el: '#num4'
+});
+//全局注册
+Vue.component('todo-item', {
+	  template: '<p>全局注册示例 </p>',
+	});
+	new Vue({
+		el: '#todo-item-1'
+	})
+//局部注册
+new Vue({
+		el: '#two',
+		 components: {
+		'my-component': {template: '<div><span style="color: red">局部注册示例 <div>'},
+		 }
+	})
+</script>
+</html>

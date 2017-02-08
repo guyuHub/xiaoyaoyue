@@ -1,0 +1,102 @@
+10:03:47.838 4552 [main] INFO  cn.com.doit.AppStart - Starting AppStart on LENOVOL-DJ8AJGS with PID 2544 (D:\OwnStudy\tryByGY\target\classes started by Administrator in D:\OwnStudy\tryByGY)
+10:03:47.923 4637 [main] INFO  cn.com.doit.AppStart - No active profile set, falling back to default profiles: default
+10:03:48.240 4954 [main] INFO  o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5e90dbfc: startup date [Wed Feb 08 10:03:48 CST 2017]; root of context hierarchy
+10:03:50.184 6898 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+10:03:53.371 10085 [main] INFO  o.s.b.f.s.DefaultListableBeanFactory - Overriding bean definition for bean 'managementServletContext' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.actuate.autoconfigure.EndpointWebMvcHypermediaManagementContextConfiguration; factoryMethodName=managementServletContext; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/actuate/autoconfigure/EndpointWebMvcHypermediaManagementContextConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.actuate.autoconfigure.EndpointWebMvcAutoConfiguration; factoryMethodName=managementServletContext; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/actuate/autoconfigure/EndpointWebMvcAutoConfiguration.class]]
+10:03:54.633 11347 [main] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+10:03:54.883 11597 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dbconfig' of type [class cn.com.doit.cfg.Dbconfig$$EnhancerBySpringCGLIB$$2f63a467] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+10:03:56.834 13548 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSource' of type [class com.zaxxer.hikari.HikariDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+10:03:56.892 13606 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariCP pool HikariPool-0 is starting.
+10:03:58.447 15161 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+10:03:58.504 15218 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'student_infoMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+10:03:58.691 15405 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ca344990] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+10:04:00.227 16941 [main] INFO  o.s.b.c.e.t.TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 9999 (https) 9494 (http)
+10:04:00.287 17001 [main] INFO  o.a.catalina.core.StandardService - Starting service Tomcat
+10:04:00.295 17009 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.6
+10:04:00.655 17369 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:04:00.655 17369 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 12415 ms
+10:04:01.283 17997 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean - Mapping servlet: 'dispatcherServlet' to [/]
+10:04:01.299 18013 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'metricsFilter' to: [/*]
+10:04:01.300 18014 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+10:04:01.301 18015 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+10:04:01.301 18015 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+10:04:01.301 18015 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+10:04:01.301 18015 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'webRequestLoggingFilter' to: [/*]
+10:04:01.302 18016 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'applicationContextIdFilter' to: [/*]
+10:04:01.511 18225 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+10:04:01.558 18272 [main] INFO  o.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+10:04:01.559 18273 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.2.3 created.
+10:04:01.560 18274 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+10:04:01.561 18275 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.2.3) 'scheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+10:04:01.561 18275 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'scheduler' initialized from an externally provided properties instance.
+10:04:01.561 18275 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.2.3
+10:04:01.563 18277 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@7f5ad986
+10:04:03.452 20166 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5e90dbfc: startup date [Wed Feb 08 10:03:48 CST 2017]; root of context hierarchy
+10:04:03.480 20194 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Detected ResponseBodyAdvice bean in org.springframework.boot.actuate.autoconfigure.EndpointWebMvcHypermediaManagementContextConfiguration$ActuatorEndpointLinksAdvice
+10:04:03.741 20455 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/student/add],methods=[POST]}" onto public cn.com.doit.util.ExtJSResponse cn.com.doit.bo.login.service.StudentService.add(cn.com.doit.pojo.login.student_info)
+10:04:03.746 20460 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/student/list]}" onto public cn.com.doit.util.ExtJSResponse cn.com.doit.bo.login.service.StudentService.list(java.lang.String)
+10:04:03.747 20461 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/student/update]}" onto public cn.com.doit.util.ExtJSResponse cn.com.doit.bo.login.service.StudentService.update(cn.com.doit.pojo.login.student_info)
+10:04:03.748 20462 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/student/tolist.pdf]}" onto public java.lang.String cn.com.doit.bo.login.service.StudentService.tolist(org.springframework.ui.Model)
+10:04:03.749 20463 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/student/delete]}" onto public cn.com.doit.util.ExtJSResponse cn.com.doit.bo.login.service.StudentService.dlete(cn.com.doit.pojo.login.student_info)
+10:04:03.755 20469 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/requestParamr],methods=[POST]}" onto public java.lang.String cn.com.doit.z.test.service.TestService.requestParamrTest(java.lang.String,java.lang.String,java.lang.Integer)
+10:04:03.756 20470 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/requestDataBinder],methods=[POST]}" onto public java.lang.String cn.com.doit.z.test.service.TestService.requestDataBinderTest(cn.com.doit.z.test.pojo.TestStudent)
+10:04:03.756 20470 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/requestbody]}" onto public java.lang.String cn.com.doit.z.test.service.TestService.requestBodyTest(cn.com.doit.z.test.pojo.TestStudent)
+10:04:03.757 20471 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/date]}" onto public java.lang.String cn.com.doit.z.test.service.TestService.requestDateTest(java.util.Date)
+10:04:03.764 20478 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+10:04:03.765 20479 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+10:04:03.885 20599 [main] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+10:04:03.885 20599 [main] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+10:04:03.886 20600 [main] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/docs/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+10:04:03.947 20661 [main] INFO  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Detected ResponseBodyAdvice implementation in org.springframework.boot.actuate.autoconfigure.EndpointWebMvcHypermediaManagementContextConfiguration$ActuatorEndpointLinksAdvice
+10:04:04.023 20737 [main] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+10:04:04.074 20788 [main] INFO  o.s.b.a.w.WebMvcAutoConfiguration$WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+10:04:05.183 21897 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/env/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EnvironmentMvcEndpoint.value(java.lang.String)
+10:04:05.184 21898 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/env || /env.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+10:04:05.189 21903 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/configprops || /configprops.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+10:04:05.191 21905 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/health || /health.json],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.HealthMvcEndpoint.invoke(java.security.Principal)
+10:04:05.194 21908 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/info || /info.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+10:04:05.198 21912 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/metrics/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.MetricsMvcEndpoint.value(java.lang.String)
+10:04:05.198 21912 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/metrics || /metrics.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+10:04:05.200 21914 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/autoconfig || /autoconfig.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+10:04:05.202 21916 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/beans || /beans.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+10:04:05.205 21919 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/actuator || /actuator.json],produces=[application/json]}" onto public org.springframework.hateoas.ResourceSupport org.springframework.boot.actuate.endpoint.mvc.HalJsonMvcEndpoint.links()
+10:04:05.209 21923 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/mappings || /mappings.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+10:04:05.211 21925 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/trace || /trace.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+10:04:05.212 21926 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/dump || /dump.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+10:04:05.215 21929 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/heapdump || /heapdump.json],methods=[GET],produces=[application/octet-stream]}" onto public void org.springframework.boot.actuate.endpoint.mvc.HeapdumpMvcEndpoint.invoke(boolean,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException,javax.servlet.ServletException
+10:04:05.221 21935 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/docs],produces=[text/html]}" onto public java.lang.String org.springframework.boot.actuate.endpoint.mvc.DocsMvcEndpoint.redirect()
+10:04:05.221 21935 [main] INFO  o.s.b.a.e.m.EndpointHandlerMapping - Mapped "{[/docs/],produces=[text/html]}" onto public java.lang.String org.springframework.boot.actuate.endpoint.mvc.DocsMvcEndpoint.browse()
+10:04:05.901 22615 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+10:04:05.911 22625 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Registering beans for JMX exposure on startup
+10:04:05.917 22631 [main] INFO  o.s.c.s.DefaultLifecycleProcessor - Starting beans in phase 0
+10:04:05.934 22648 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Located managed bean 'requestMappingEndpoint': registering with JMX server as MBean [org.springframework.boot:type=Endpoint,name=requestMappingEndpoint]
+10:04:05.991 22705 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Located managed bean 'environmentEndpoint': registering with JMX server as MBean [org.springframework.boot:type=Endpoint,name=environmentEndpoint]
+10:04:06.002 22716 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Located managed bean 'healthEndpoint': registering with JMX server as MBean [org.springframework.boot:type=Endpoint,name=healthEndpoint]
+10:04:06.011 22725 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Located managed bean 'beansEndpoint': registering with JMX server as MBean [org.springframework.boot:type=Endpoint,name=beansEndpoint]
+10:04:06.018 22732 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Located managed bean 'infoEndpoint': registering with JMX server as MBean [org.springframework.boot:type=Endpoint,name=infoEndpoint]
+10:04:06.025 22739 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Located managed bean 'metricsEndpoint': registering with JMX server as MBean [org.springframework.boot:type=Endpoint,name=metricsEndpoint]
+10:04:06.033 22747 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Located managed bean 'traceEndpoint': registering with JMX server as MBean [org.springframework.boot:type=Endpoint,name=traceEndpoint]
+10:04:06.040 22754 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Located managed bean 'dumpEndpoint': registering with JMX server as MBean [org.springframework.boot:type=Endpoint,name=dumpEndpoint]
+10:04:06.053 22767 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Located managed bean 'autoConfigurationReportEndpoint': registering with JMX server as MBean [org.springframework.boot:type=Endpoint,name=autoConfigurationReportEndpoint]
+10:04:06.061 22775 [main] INFO  o.s.b.a.e.jmx.EndpointMBeanExporter - Located managed bean 'configurationPropertiesReportEndpoint': registering with JMX server as MBean [org.springframework.boot:type=Endpoint,name=configurationPropertiesReportEndpoint]
+10:04:06.068 22782 [main] INFO  o.s.c.s.DefaultLifecycleProcessor - Starting beans in phase 2147483647
+10:04:06.069 22783 [main] INFO  o.s.s.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+10:04:06.069 22783 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler scheduler_$_NON_CLUSTERED started.
+10:04:06.136 22850 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-9999"]
+10:04:06.163 22877 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler [https-jsse-nio-9999]
+10:04:07.092 23806 [main] INFO  o.a.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+10:04:07.115 23829 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9494"]
+10:04:07.118 23832 [main] INFO  o.a.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+10:04:07.118 23832 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler [http-nio-9494]
+10:04:07.134 23848 [main] INFO  o.s.b.c.e.t.TomcatEmbeddedServletContainer - Tomcat started on port(s): 9999 (https) 9494 (http)
+10:04:07.141 23855 [main] INFO  cn.com.doit.AppStart - Started AppStart in 21.664 seconds (JVM running for 24.801)
+10:05:35.004 111718 [http-nio-9494-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+10:05:35.005 111719 [http-nio-9494-exec-1] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+10:05:35.059 111773 [http-nio-9494-exec-1] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 54 ms
