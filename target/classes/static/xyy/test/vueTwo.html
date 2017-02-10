@@ -35,7 +35,7 @@
 <template id='child1'>
 <div>
   <span style="color: red">我是大儿子,我爸姓{{Msg}},我今年{{age}}岁</span>
-  <sunzi v-bind:Xi="Msg" :oldage="oldage"></sunzi>
+  <sunzi v-bind:Xi="Msg"></sunzi>
 </div>
 </template>
 
@@ -50,26 +50,97 @@
 <div id="num4">
 <parent></parent>
 </div>
+<!-- 自定义事件 -->
+<div id='selfEvent'>
+<p>{{totol}}</p>
+<button-add v-on:selfevent='tocount'></button-add>
+<button-add v-on:selfevent='tocount'></button-add>
+</div>
+<template id='buttonadd'>
+<button v-on:click='add'>{{num}}</button>
+</template>
+<!-- 使用自定义事件的表单输入组件 -->
+<div id="selftable">
+  <currency-input label="Price" v-model="price"></currency-input>
+  <p>Total: ${{ mytotal }}</p>
+</div>
+<template id='currencyinput'>
+<div>
+  <span style='color: bule' v-if='label'>{{label}} $</span>
+ <input ref='input' v-on:input='update($event.target.value)' />
+</div>
+</template>
 </body>
 <script type="text/javascript">
-
+<!-- 使用自定义事件的表单输入组件 -->
+Vue.component('currency-input',{
+	template: '#currencyinput',
+	props: {
+		value: {
+			type: Number,
+			default: 0
+		},
+		label: {
+			typr: String,
+			default: ''
+		}
+	},
+	methods: {
+		update: function(value){
+			this.$ref.input.value=value,
+			alert(this.value)
+		}
+	}
+});
+new Vue({
+	el: '#selftable'
+})
+//自定义事件
+Vue.component('button-add',{
+	template: '#buttonadd',
+	data: function(){
+		return {num: 0}
+	},
+	methods: {
+		add: function (){
+			this.num +=2;
+			this.$emit('selfevent')
+		}
+	},
+});
+new Vue({
+	el: '#selfEvent',
+	data: function(){
+		return {totol: 0}
+	},
+	methods: {
+		tocount: function(){
+			this.totol=this.$children[0].num+this.$children[1].num
+		}
+	}
+});
+//{type:对 { type:错，多了一个空格
 var child1=Vue.component('child1', {
 	  template: '#child1',
-	  props: ['Msg','oldage'],
+	  props: {'Msg': {type: String,
+                       default: "谷"},
+	  },
 	  computed: {
 		  age: function () {
-		    return this.oldage-20
+		    var linshi=this.$parent.oldage-20;
+		    if(linshi>0){return linshi;}
+		    else{return '非法'}
 		  }
 		},
 	  components: {
 		  'sunzi': {
 			  template: '#sunzi',
 			  props: {'Xi': String,
-				      'oldage': Number},
+		          },
 				// 声明 props
 			  computed: {
 				  newage: function () {
-				    return this.oldage-40
+				    return this.$parent.$parent.oldage-40
 				  }
 				},
 			 },
