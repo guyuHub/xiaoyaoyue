@@ -5,8 +5,8 @@
 	<artifactId>tryByGY</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<spring.boot.version>1.4.1.RELEASE</spring.boot.version>
-		<spring-framework.version>4.3.3.RELEASE</spring-framework.version>
+		<spring.boot.version>1.4.4.RELEASE</spring.boot.version>
+		<spring-framework.version>4.3.6.RELEASE</spring-framework.version>
 	</properties>
 
 	<dependencies>

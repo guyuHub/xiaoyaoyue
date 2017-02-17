@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.velocity.VelocityProperties;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
@@ -37,14 +38,26 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
+import org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver;
 
 import cn.com.doit.mvc.formatAndconverter.Converter_StringToDate;
 import cn.com.doit.mvc.formatAndconverter.Formatter_StringToDate;
 import cn.com.doit.util.ApplicationFactoryUtil;
 import cn.com.doit.z.test.cfg.mvc.formatAndconverter.TestStudentConverter;
+@SuppressWarnings({ "unused", "deprecation" })
 @Configuration
 public class VelocityConfig{
+	@SuppressWarnings("deprecation")
+	@Autowired
+	public VelocityProperties properties;
 	
-
+//	@SuppressWarnings("deprecation")
+//	@Bean(name = "velocityViewResolver")
+//	public VelocityLayoutViewResolver velocityViewResolver(VelocityProperties properties) {
+//	    VelocityLayoutViewResolver resolver = new VelocityLayoutViewResolver();
+//	    properties.applyToViewResolver(resolver);
+//	    resolver.setLayoutUrl("layout/default.vm");
+//	    return resolver;
+//	}
 	
 }
