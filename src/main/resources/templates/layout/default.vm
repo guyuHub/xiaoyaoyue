@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+  <p>天气不错</p>
 $screen_content  
 </body>
 </html>

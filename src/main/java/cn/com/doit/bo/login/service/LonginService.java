@@ -44,7 +44,6 @@ public class LonginService {
 	public String list(Map<String, Object> model){
   
 	List<String> l= new ArrayList();  
-		  System.out.println("进来了");
 		    l.add("哈喽，hadoop");  
 		    l.add("哈喽，hbase");  
 		    l.add("哈喽，hive");  

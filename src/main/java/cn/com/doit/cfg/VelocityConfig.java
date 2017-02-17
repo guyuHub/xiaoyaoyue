@@ -51,13 +51,13 @@ public class VelocityConfig{
 	@Autowired
 	public VelocityProperties properties;
 	
-//	@SuppressWarnings("deprecation")
-//	@Bean(name = "velocityViewResolver")
-//	public VelocityLayoutViewResolver velocityViewResolver(VelocityProperties properties) {
-//	    VelocityLayoutViewResolver resolver = new VelocityLayoutViewResolver();
-//	    properties.applyToViewResolver(resolver);
-//	    resolver.setLayoutUrl("layout/default.vm");
-//	    return resolver;
-//	}
+	@SuppressWarnings("deprecation")
+	@Bean(name = "velocityViewResolver")
+	public VelocityLayoutViewResolver velocityViewResolver(VelocityProperties properties) {
+	    VelocityLayoutViewResolver resolver = new VelocityLayoutViewResolver();
+	    properties.applyToViewResolver(resolver);
+	    resolver.setLayoutUrl("layout/default.vm");
+	    return resolver;
+	}
 	
 }
