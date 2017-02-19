@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.velocity.VelocityAutoConfiguration;
 import org.springframework.boot.autoconfigure.velocity.VelocityProperties;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
@@ -59,5 +60,4 @@ public class VelocityConfig{
 	    resolver.setLayoutUrl("layout/default.vm");
 	    return resolver;
 	}
-	
 }

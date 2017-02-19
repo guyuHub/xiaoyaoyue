@@ -86,12 +86,19 @@ public class MVCConfig extends WebMvcConfigurerAdapter{
 		//或者在请求路径中以.json结尾，会经过处理成为MimeType--application/json，详情见源码
 //		configurer.ignoreAcceptHeader(true).defaultContentType(
 //                MediaType.TEXT_HTML);
-		MimeType type=MimeTypeUtils.parseMimeType("application/pdf");
-		  configurer.mediaType("pdf",
-		new MediaType(type.getType(), type.getSubtype(), type.getParameters()));
+//		MimeType type=MimeTypeUtils.parseMimeType("application/pdf");
+//		  configurer.mediaType("pdf",
+//		new MediaType(type.getType(), type.getSubtype(), type.getParameters()));
+		  //见https://my.oschina.net/heweipo/blog/340040
+//		  configurer.favorPathExtension(true).
+//		     favorParameter(true).
+//		     ignoreAcceptHeader(false).
+//		     useJaf(false).
+//		     defaultContentType(MediaType.TEXT_HTML).
+//		     mediaType("json", MediaType.APPLICATION_JSON);
 				
 	}
-
+	
 //	@Override
 //	public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
 //	}

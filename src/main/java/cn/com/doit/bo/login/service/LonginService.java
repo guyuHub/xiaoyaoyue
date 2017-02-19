@@ -34,26 +34,26 @@ import cn.com.doit.util.ModelToView;
 
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/sb")
 @CrossOrigin
 public class LonginService {
 
  private ApplicationFactoryUtil applicationFactoryUtil;
 
-	@RequestMapping("/list")
+	@RequestMapping("/login")
 	public String list(Map<String, Object> model){
   
-	List<String> l= new ArrayList();  
-		    l.add("哈喽，hadoop");  
-		    l.add("哈喽，hbase");  
-		    l.add("哈喽，hive");  
-		    l.add("哈喽，pig");  
-		    l.add("哈喽，zookeeper");  
-		    l.add("哈喽，三劫散仙");  
-		    //将数据存放map里面，可以直接在velocity页面，使用key访问  
-		    model.put("data",l);  
-		  
-		    return "hello";  
+//	List<String> l= new ArrayList();  
+//		    l.add("哈喽，hadoop");  
+//		    l.add("哈喽，hbase");  
+//		    l.add("哈喽，hive");  
+//		    l.add("哈喽，pig");  
+//		    l.add("哈喽，zookeeper");  
+//		    l.add("哈喽，三劫散仙");  
+//		    //将数据存放map里面，可以直接在velocity页面，使用key访问  
+//		    model.put("data",l);  
+		  System.out.println("看啥呢?");
+		    return "Login";  
 
 	}
 	
