@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.web.WebMvcProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
@@ -36,6 +37,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import cn.com.doit.mvc.formatAndconverter.Converter_StringToDate;
@@ -76,12 +78,19 @@ public class MVCConfig extends WebMvcConfigurerAdapter{
 //	public Validator getValidator() {
 //		return null;
 //	}
-
+	@Bean
+	public ContentNegotiatingViewResolver viewResolver() {
+		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+		// ContentNegotiatingViewResolver uses all the other view resolvers to locate
+		// a view so it should have a high precedence
+		resolver.setOrder(Ordered.LOWEST_PRECEDENCE);
+		return resolver;
+	}
 	/**
 	 * WebMvcConfigurationSupport ContentNegotiationManager	
 	 *对于pdf后缀名来说不需要，因为ContentNegotiationManager的resolveMediaTypes方法会调用的其注册的策略类的父类AbstractMappingContentNegotiationStrategy和子类相关方法例如lookupMediaType和handleMatch添加一些路径和MimeType的映射关系，这些路径需要是ServletContext里的MimeType的组成部分*/
-	@Override
-	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+	//@Override
+//	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 		//如果不加该注释，则请求中应指定content-type为application/json，若不指定，则mvc会提取acceptl来设置MimeType
 		//或者在请求路径中以.json结尾，会经过处理成为MimeType--application/json，详情见源码
 //		configurer.ignoreAcceptHeader(true).defaultContentType(
@@ -96,8 +105,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter{
 //		     useJaf(false).
 //		     defaultContentType(MediaType.TEXT_HTML).
 //		     mediaType("json", MediaType.APPLICATION_JSON);
-				
-	}
+	//			}
 	
 //	@Override
 //	public void configureAsyncSupport(AsyncSupportConfigurer configurer) {

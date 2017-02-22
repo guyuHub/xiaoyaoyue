@@ -4,6 +4,7 @@ import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.springframework.boot.test.util.ApplicationContextTestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -56,11 +58,28 @@ public class LonginService {
 		System.out.println("看啥呢?");
 		return "Login";
 	}
-
-	@RequestMapping("/userValidate")
-	public String list(@Valid user_info user, BindingResult result) {
-		System.out.println("咋的呢?");
+	@RequestMapping("/hello")
+	public String hello(Map<String, Object> model) {
+		System.out.println("Come On..");
 		return "hello";
+	}
+    @ResponseBody
+	@RequestMapping("/userValidate")
+	public Map<String, String> list(@Valid user_info user, BindingResult result) {
+    	Map<String, String> resultMap=new HashMap<String, String>();
+    	if(result.hasErrors()){
+    	List<ObjectError> errors=	result.getAllErrors();
+    	StringBuilder message=new StringBuilder();
+    		resultMap.put("status","error");
+    		for (ObjectError objectError : errors) {
+				message.append(objectError.getCode());
+			}
+    		resultMap.put("message", message.toString());
+    	}else{
+    		resultMap.put("status", "sucess");
+    		resultMap.put("url", "hello");
+    	}
+		return resultMap;
 	}
 
 }

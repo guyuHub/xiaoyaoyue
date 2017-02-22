@@ -4,6 +4,9 @@
 .bg{
 	 background: url(/resources/images/Login.jpg);
 }
+.error{
+	color: red;
+}
 .form-horizontal{
     background: #fff;
     padding-bottom: 40px;
