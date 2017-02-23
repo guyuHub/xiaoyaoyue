@@ -1,3 +1,4 @@
+package cn.com.doit.login.controller;
 //package cn.com.doit.bo.login.service;
 //
 //import static org.quartz.CronScheduleBuilder.cronSchedule;

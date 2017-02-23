@@ -1,4 +1,4 @@
-package cn.com.doit.bo.login.service;
+package cn.com.doit.login.controller;
 
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -33,10 +33,10 @@ import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
 
 import ch.qos.logback.core.db.BindDataSourceToJNDIAction;
 import cn.com.doit.Validator.custom.UserInfoValidator;
+import cn.com.doit.login.service.LoginService;
 import cn.com.doit.pojo.login.student_info;
 import cn.com.doit.pojo.login.user_info;
 //import cn.com.bsfit.doit.z.test.schedule.TestScheduleDongTai;
-import cn.com.doit.pojo.login.service.StudentBO;
 import cn.com.doit.util.ApplicationFactoryUtil;
 import cn.com.doit.util.ExtJSResponse;
 import cn.com.doit.util.ModelToView;
@@ -44,7 +44,7 @@ import cn.com.doit.util.ModelToView;
 @Controller
 @RequestMapping("/sb")
 @CrossOrigin
-public class LonginService {
+public class LonginController {
 
 	private ApplicationFactoryUtil applicationFactoryUtil;
 

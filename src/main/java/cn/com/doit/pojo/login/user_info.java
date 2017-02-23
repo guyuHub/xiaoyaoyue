@@ -17,6 +17,8 @@ public class user_info implements Serializable, FiledToShow {
 
 	private String address;// 用户住址
 
+	private String role;// 用户角色
+
 	public Integer getId() {
 		return id;
 	}
@@ -70,7 +72,6 @@ public class user_info implements Serializable, FiledToShow {
 	}
 
 	private static final long serialVersionUID = 1L;
-
 
 	public user_info() {
 		super();
@@ -155,5 +156,12 @@ public class user_info implements Serializable, FiledToShow {
 		return null;
 	}
 
-	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 }
