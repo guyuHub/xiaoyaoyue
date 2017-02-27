@@ -32,17 +32,18 @@ public class LoginServiceImpl implements LoginService {
 	public WritePolicy writePolicy;
 	@Resource(name = "readPolicy")
 	public Policy readPolicy;
+
 	public boolean queryBySql(String name, String password) {
 
 		return true;
 	}
 
-	public boolean addToCache(user_info user) {
+	public String addToCache(user_info user) {
 		String writekey = JiaMiUtil.MessageDigest(user.getName());
 		// 设置写入策略
 		WritePolicy policy = new WritePolicy();
 		policy.timeout = 50;// 写入超时 单位毫秒
-		policy.expiration=600;//过期时间600s
+		policy.expiration = 600;// 过期时间600s
 		// policy.sendKey=true;
 
 		// 构造key和record
@@ -56,34 +57,31 @@ public class LoginServiceImpl implements LoginService {
 		try {
 			asClient.put(policy, key, name, role);
 		} catch (Exception e) {
-			return false;
+			return "asError";
 		}
 
-		return true;
+		return writekey;
 	}
 
 	public user_info getByCache(String key) {
-	
+
 		Key readKey = new Key("freeRead", "login", key);
 		Record red = asClient.get(readPolicy, readKey);
-		if(red!=null){
-			Record record = asClient.operate(writePolicy, readKey, Operation.touch());
+		if (red != null) {
+			Record record = asClient.operate(writePolicy, readKey,
+					Operation.touch());
 		}
 		System.out.println(red.toString());
 		return convert(red);
 	}
 
-	// @Autowired
-	// private student_infoMapper student_infoMapper;
-	//用于转换缓存记录为user_info
-  private user_info convert(Record red){
-	 // ReflectionUtils bb;
-	  user_info user=new user_info();
-	  user.setName(red.getString("name"));
-	  user.setRole(red.getString("role"));
-	return user;
-  }
-  public void addTTL(){
-	  
-  }
+	// 用于转换缓存记录为user_info
+	private user_info convert(Record red) {
+		// ReflectionUtils bb;
+		user_info user = new user_info();
+		user.setName(red.getString("name"));
+		user.setRole(red.getString("role"));
+		return user;
+	}
+
 }

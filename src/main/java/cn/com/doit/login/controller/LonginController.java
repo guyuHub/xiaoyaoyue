@@ -3,11 +3,15 @@ package cn.com.doit.login.controller;
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.quartz.Scheduler;
@@ -47,7 +51,10 @@ import cn.com.doit.util.ModelToView;
 public class LonginController {
 
 	private ApplicationFactoryUtil applicationFactoryUtil;
-
+	private SimpleDateFormat sdf = new SimpleDateFormat(
+			"yyyy-MM-dd HH:mm:ss.SSS");
+      @Resource(name="loginService")
+	 private LoginService loginService;
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.setValidator(new UserInfoValidator());
@@ -76,10 +83,49 @@ public class LonginController {
 			}
     		resultMap.put("message", message.toString());
     	}else{
+    		loginService.addToCache(user);
     		resultMap.put("status", "sucess");
     		resultMap.put("url", "hello");
     	}
 		return resultMap;
 	}
-
+//    @ResponseBody
+//    @RequestMapping("/listJson")
+//	public List<SimpleUser> listJson(String startTime,String endTime) throws ParseException {
+//    	System.out.println("-----------"+startTime);
+//    	System.out.println("***********"+endTime);
+//    	List<SimpleUser> sb=new ArrayList<SimpleUser>();
+//    	SimpleUser user1=new SimpleUser();
+//    	user1.setBaoFooId("2018022701");
+//    	user1.setBaooFooName("邦盛11");
+//    	user1.setRegisterTime(sdf.parse("2017-02-27 10:11:11.000").getTime());
+//    	user1.setUpdateTime(sdf.parse("2017-02-27 10:11:11.000").getTime());
+//    	
+//    	SimpleUser user2=new SimpleUser();
+//    	user2.setBaoFooId("2018022702");
+//    	user2.setBaooFooName("邦盛21");
+//    	user2.setRegisterTime(sdf.parse("2017-02-27 10:12:11.000").getTime());
+//    	user2.setUpdateTime(sdf.parse("2017-02-27 10:12:11.000").getTime());
+//    	
+//    	SimpleUser user3=new SimpleUser();
+//    	user3.setBaoFooId("2018022703");
+//    	user3.setBaooFooName("邦盛31");
+//    	user3.setRegisterTime(sdf.parse("2017-02-27 10:13:11.000").getTime());
+//    	user3.setUpdateTime(sdf.parse("2017-02-27 10:13:11.000").getTime());
+//    	
+//    	sb.add(user1);
+//    	sb.add(user2);
+//    	sb.add(user3);
+//		return sb;
+//	}
+//    
+//    @ResponseBody
+//    @RequestMapping("/listTime")
+//	public long listTime(String last) throws ParseException {
+//    	if(last.equals("false")){
+//    		return sdf.parse("2017-02-26 10:13:11.000").getTime();
+//    	}else{
+//    		return sdf.parse("2017-02-27 13:13:11.000").getTime();
+//    	}
+//    }
 }
