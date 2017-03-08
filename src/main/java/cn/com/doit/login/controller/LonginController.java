@@ -82,8 +82,11 @@ public class LonginController {
 				message.append(objectError.getCode());
 			}
     		resultMap.put("message", message.toString());
+    		
     	}else{
-    		loginService.addToCache(user);
+    		//登陆成功后缓存标识
+    		String st=loginService.addToCache(user);	
+    		resultMap.put("key", st);
     		resultMap.put("status", "sucess");
     		resultMap.put("url", "hello");
     	}
