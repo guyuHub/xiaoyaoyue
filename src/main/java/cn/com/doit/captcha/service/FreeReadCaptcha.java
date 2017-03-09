@@ -1,5 +1,6 @@
 package cn.com.doit.captcha.service;
 
+import java.io.OutputStream;
 import java.util.Map;
 
 public interface FreeReadCaptcha {
@@ -13,7 +14,7 @@ public interface FreeReadCaptcha {
 	 * @param leavel 干扰等级
 	 * @return 生成后的图片验证码
 	 */
-     public Object getImage(String var,int leavel);
+     public String getImage(String var,int leavel, OutputStream out);
      
      /**
       * 

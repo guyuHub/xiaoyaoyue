@@ -24,7 +24,7 @@ public abstract class Generator {
 	/**generate the random validation strings
 	 * @return
 	 */
-	protected char[] alphas() {
+	public char[] alphas() {
 		char[] cs = new char[len];
 		for (int i = 0; i < len; i++) {
 			cs[i] = alpha();
@@ -86,6 +86,7 @@ public abstract class Generator {
 	 * @return OutputStream  return OutputStream wrote the validation code image
 	 */
 	public abstract OutputStream write2out(OutputStream os);
+	public abstract OutputStream write2out(OutputStream os,char[] strs);
 
 	/**no result provide for gif validation code. only for PNG validation code image.
 	 *  only @see com.github.botaruibo.xvcode.generator.Captcha#write2out(OutputStream os) avaliable for GIF

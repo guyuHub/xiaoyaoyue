@@ -87,7 +87,22 @@ public class PngVCGenerator extends Generator {
 		} 
 		return os;
 	}
-
+   
+	public OutputStream write2out(OutputStream os,char[] strs) {
+		if (os == null) {
+			return null;
+		}
+		BufferedImage bi = getValidCodeImage(strs);
+		
+		try {
+			ImageIO.write(bi, "png", os);
+			os.flush();
+		} catch (IOException e) {
+			//ignore
+			e.printStackTrace();
+		} 
+		return os;
+	}
 	/**draw random validation code image
 	 * @param strs the random validation code
 	 * @return BufferedImage with validation code 

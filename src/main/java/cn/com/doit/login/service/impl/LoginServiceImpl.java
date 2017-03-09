@@ -1,11 +1,22 @@
 package cn.com.doit.login.service.impl;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
 
+import org.apache.catalina.security.SecurityUtil;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -24,15 +35,18 @@ import cn.com.doit.pojo.login.user_info;
 import cn.com.doit.pojo.login.mapper.student_infoMapper;
 import cn.com.doit.util.JiaMiUtil;
 
-@Component(value = "loginService")
+@Configuration(value = "loginService")
 public class LoginServiceImpl implements LoginService {
+	private Log log=LogFactory.getLog(LoginServiceImpl.class);
+
 	@Resource(name = "asClient")
 	public AerospikeClient asClient;
 	@Resource(name = "writePolicy")
 	public WritePolicy writePolicy;
 	@Resource(name = "readPolicy")
 	public Policy readPolicy;
-
+	@Resource(name = "random")
+	public Random random;
 	public boolean queryBySql(String name, String password) {
 
 		return true;
@@ -40,12 +54,6 @@ public class LoginServiceImpl implements LoginService {
 
 	public String addToCache(user_info user) {
 		String writekey = JiaMiUtil.MessageDigest(user.getName());
-		// 设置写入策略
-		WritePolicy policy = new WritePolicy();
-		policy.timeout = 50;// 写入超时 单位毫秒
-		policy.expiration = 600;// 过期时间600s
-		// policy.sendKey=true;
-
 		// 构造key和record
 		Key key = new Key("freeRead", "login", writekey);
 		Bin name = new Bin("name", user.getName());
@@ -55,14 +63,39 @@ public class LoginServiceImpl implements LoginService {
 			System.out.println("failed to connect server.please to check it");
 		}
 		try {
-			asClient.put(policy, key, name, role);
+			asClient.put(writePolicy, key, name, role);
 		} catch (Exception e) {
 			return "asError";
 		}
-
 		return writekey;
 	}
+	public void addToCache(String key,String value) {
+	
+		Key writekey = new Key("freeRead", "session", key);
+		Bin writevalue = new Bin("value",value);
+	
+		if (asClient == null) {
+			System.out.println("failed to connect server.please to check it");
+		}
+		try {
+			asClient.put(writePolicy, writekey, writevalue);
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+	}
+	public String getByCacheValue(String key) {
 
+		Key readKey = new Key("freeRead", "session", key);
+		Record red = asClient.get(readPolicy, readKey);
+		String result=red.getString("value");
+		if (red != null) {
+			boolean record = asClient.delete(writePolicy, readKey);
+			if(record){
+				log.error("删除记录失败...");
+			}
+		}
+		return result;
+	}
 	public user_info getByCache(String key) {
 
 		Key readKey = new Key("freeRead", "login", key);
@@ -82,6 +115,15 @@ public class LoginServiceImpl implements LoginService {
 		user.setName(red.getString("name"));
 		user.setRole(red.getString("role"));
 		return user;
+	}
+
+
+	public String randomKey() {
+       long value=random.nextLong();
+       long time=System.currentTimeMillis();
+       String reString=Long.valueOf(value).toString()+Long.valueOf(time).toString();
+       String imgKey = JiaMiUtil.MessageDigest(reString);
+	 return imgKey;	
 	}
 
 }

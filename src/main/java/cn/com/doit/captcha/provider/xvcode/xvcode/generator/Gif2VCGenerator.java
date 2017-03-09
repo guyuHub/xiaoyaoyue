@@ -99,7 +99,37 @@ public class Gif2VCGenerator extends Generator {
 		gifEncoder.finish();
 		return out;
 	}
-
+	public OutputStream write2out(OutputStream out,char[] strs) {
+		if (out == null) {
+			return null;
+		}
+		AnimatedGifEncoder gifEncoder = new AnimatedGifEncoder();
+		// 生成字符
+		gifEncoder.start(out);
+		gifEncoder.setQuality(180);
+		gifEncoder.setDelay(gifDelayTime);
+		gifEncoder.setRepeat(0);
+		BufferedImage frame;
+		char[] rands = strs;
+		Color fontcolor[] = new Color[len];
+		for (int i = 0; i < len; i++) {
+			fontcolor[i] = new Color(20 + num(110), 20 + num(110), 20 + num(110));
+		}
+		int[] ovalPosition = new int[ovalCount * 4];
+		for (int i = 0; i < ovalPosition.length; i += 4) {
+			ovalPosition[i] = num(width);
+			ovalPosition[i+1] = num(height);
+			ovalPosition[i+2] = 10 + num(10);
+			ovalPosition[i+3] = 10 + num(10);
+		}
+		for (int i = 0; i < len; i++) {
+			frame = getValidCodeImage(fontcolor, rands, ovalPosition, i);
+			gifEncoder.addFrame(frame);
+			frame.flush();
+		}
+		gifEncoder.finish();
+		return out;
+	}
 	/** draw one frame for the GIF image
 	 * @param fontcolor font color
 	 * @param strs validation string
@@ -156,4 +186,6 @@ public class Gif2VCGenerator extends Generator {
 	public BufferedImage getValidCodeImage() {
 		return null;
 	}
+
+
 }

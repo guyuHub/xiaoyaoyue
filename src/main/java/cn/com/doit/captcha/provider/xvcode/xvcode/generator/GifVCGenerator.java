@@ -78,7 +78,29 @@ public class GifVCGenerator extends Generator {
 		gifEncoder.finish();
 		return out;
 	}
-
+	public OutputStream write2out(OutputStream out,char[] strs) {
+		if (out == null) {
+			return null;
+		}
+		AnimatedGifEncoder gifEncoder = new AnimatedGifEncoder();
+		gifEncoder.start(out);
+		gifEncoder.setQuality(180);
+		gifEncoder.setDelay(gifDelayTime);
+		gifEncoder.setRepeat(0);
+		BufferedImage frame;
+		char[] rands = strs;
+		Color fontcolor[] = new Color[len];
+		for (int i = 0; i < len; i++) {
+			fontcolor[i] = new Color(20 + num(110), 20 + num(110), 20 + num(110));
+		}
+		for (int i = 0; i < len; i++) {
+			frame = getValidCodeImage(fontcolor, rands, i);
+			gifEncoder.addFrame(frame);
+			frame.flush();
+		}
+		gifEncoder.finish();
+		return out;
+	}
 	/** draw one frame for the GIF image
 	 * @param fontcolor font color
 	 * @param strs validation string
