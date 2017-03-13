@@ -84,7 +84,7 @@ public class GifVCGenerator extends Generator {
 		}
 		AnimatedGifEncoder gifEncoder = new AnimatedGifEncoder();
 		gifEncoder.start(out);
-		gifEncoder.setQuality(180);
+		gifEncoder.setQuality(10);
 		gifEncoder.setDelay(gifDelayTime);
 		gifEncoder.setRepeat(0);
 		BufferedImage frame;
@@ -123,8 +123,8 @@ public class GifVCGenerator extends Generator {
 			g2d.setComposite(ac3);
 			g2d.setColor(fontcolor[i]);			
 			// one frame with tow ovals
-			g2d.drawOval(num(width), num(height), 10 + num(10), 10 + num(10));
-			g2d.drawOval(num(width), num(height), 10 + num(10), 10 + num(10));
+			//g2d.drawOval(num(width), num(height), 10 + num(10), 10 + num(10));
+			//g2d.drawOval(num(width), num(height), 10 + num(10), 10 + num(10));
 			ac3 = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, getAlpha(flag, i));
 			g2d.setComposite(ac3);
 			g2d.drawString(strs[i] + "", (width - (len - i) * w) + (w - font.getSize()) + 1, h - 4);

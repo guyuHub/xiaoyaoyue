@@ -34,7 +34,7 @@ public class FreeReadCaptchaImpl implements FreeReadCaptcha {
 			strs = var.toCharArray();
 		}
 		generator.write2out(out, strs);
-		return strs.toString();
+		return String.valueOf(strs);
 	}
 
 	public Map<String, Object> getImageWithMath(float num1, float num2,

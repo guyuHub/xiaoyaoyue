@@ -2,13 +2,18 @@ package cn.com.doit.cfg;
 
 import java.util.Random;
 
+import javax.annotation.PreDestroy;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
+import cn.com.doit.login.controller.LonginController;
 
 import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.policy.Policy;
@@ -27,11 +32,14 @@ public class AerospikeClientConfig {
 	private int expiration;
 	@Value("${nosql.aerospike.policy.timeout:50}")
 	private int timeout;
+	private AerospikeClient as;
+	  private Log log=LogFactory.getLog(AerospikeClientConfig.class);
 
 	// @ConfigurationProperties和@CrossOrigin整理
 	@Bean(name = "asClient")
 	public AerospikeClient asClient() {
-		AerospikeClient as = new AerospikeClient(host, port);
+		 as = new AerospikeClient(host, port);
+		
 		return as;
 	}
 
@@ -54,7 +62,11 @@ public class AerospikeClientConfig {
 	public Random random() {
 		return new Random(seed);
 	}
-
+    @PreDestroy
+	public void close() {
+	   as.close();
+	   log.info("Aerospike 销毁");
+	}
 	public void writeRecord() {
 	}
 

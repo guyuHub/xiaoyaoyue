@@ -19,8 +19,11 @@ import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfigura
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 
 import com.aerospike.client.AerospikeClient;
+import com.aerospike.client.AerospikeException;
 import com.aerospike.client.Bin;
 import com.aerospike.client.Key;
 import com.aerospike.client.Operation;
@@ -83,18 +86,20 @@ public class LoginServiceImpl implements LoginService {
 		e.printStackTrace();
 		}
 	}
-	public String getByCacheValue(String key) {
-
-		Key readKey = new Key("freeRead", "session", key);
-		Record red = asClient.get(readPolicy, readKey);
-		String result=red.getString("value");
-		if (red != null) {
-			boolean record = asClient.delete(writePolicy, readKey);
-			if(record){
-				log.error("删除记录失败...");
-			}
-		}
-		return result;
+	public String getByCacheValue(String key){
+try {
+	Key readKey = new Key("freeRead", "session", key);
+	Record red = asClient.get(readPolicy, readKey);
+	String result=red.getString("value");
+	if (red != null) {
+		boolean record = asClient.delete(writePolicy, readKey);
+	}
+	return result;
+} catch (AerospikeException e) {
+log.error(e);
+return "eeeeee";
+}
+		
 	}
 	public user_info getByCache(String key) {
 
@@ -124,6 +129,19 @@ public class LoginServiceImpl implements LoginService {
        String reString=Long.valueOf(value).toString()+Long.valueOf(time).toString();
        String imgKey = JiaMiUtil.MessageDigest(reString);
 	 return imgKey;	
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.doit.login.service.LoginService#validateCaptchaWihtCookie(java.lang.String, org.springframework.validation.BindingResult)
+	 */
+	public void validateCaptchaWihtCookie(String cookie, BindingResult result,String code) {
+	  String res=getByCacheValue(cookie);
+		if(res==null||res.equals("")){
+			result.addError(new ObjectError("服务器过期", "请重新输入验证码"));
+		}
+		if(!res.equalsIgnoreCase(code)){
+			result.addError(new ObjectError("造假", "孤灭了你"));
+		}
 	}
 
 }

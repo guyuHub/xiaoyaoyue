@@ -17,6 +17,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerKey;
@@ -28,6 +30,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,7 +56,7 @@ import cn.com.doit.util.ModelToView;
 @RequestMapping("/sb")
 @CrossOrigin
 public class LonginController {
-
+     private Log log=LogFactory.getLog(LonginController.class);
 	private ApplicationFactoryUtil applicationFactoryUtil;
 	private SimpleDateFormat sdf = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss.SSS");
@@ -73,7 +76,9 @@ public class LonginController {
 	@RequestMapping("/image")
 	public void image(HttpServletResponse response){
 		String key=loginService.randomKey();
-		response.addCookie(new Cookie("imgkey", key));
+		Cookie img=new Cookie("imgkey", key);
+		img.setMaxAge(120);//60s
+		response.addCookie(img);
 		try {
 		String resString=freeReadCaptcha.getImage("", 1, response.getOutputStream());
 		loginService.addToCache(key,resString);
@@ -89,14 +94,18 @@ public class LonginController {
 	}
     @ResponseBody
 	@RequestMapping("/userValidate")
-	public Map<String, String> list(@Valid user_info user, BindingResult result) {
+	public Map<String, String> list(@CookieValue("imgkey") String cookie,@Valid user_info user,String code, BindingResult result) {
     	Map<String, String> resultMap=new HashMap<String, String>();
+    	if(cookie==null||cookie.equals("")){
+    		result.addError(new ObjectError("过期","验证码过期，请重新请求验证码"));
+    	}
+    	loginService.validateCaptchaWihtCookie(cookie,result,code);
     	if(result.hasErrors()){
     	List<ObjectError> errors=	result.getAllErrors();
     	StringBuilder message=new StringBuilder();
     		resultMap.put("status","error");
     		for (ObjectError objectError : errors) {
-				message.append(objectError.getCode());
+				message.append(objectError.getCode()+objectError.getObjectName()+objectError.getDefaultMessage());
 			}
     		resultMap.put("message", message.toString());
     		
@@ -106,6 +115,7 @@ public class LonginController {
     		resultMap.put("key", st);
     		resultMap.put("status", "sucess");
     		resultMap.put("url", "hello");
+    	   log.info("登陆成功，存入缓存标识为st");
     	}
 		return resultMap;
 	}
