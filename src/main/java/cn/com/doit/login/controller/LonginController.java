@@ -56,14 +56,15 @@ import cn.com.doit.util.ModelToView;
 @RequestMapping("/sb")
 @CrossOrigin
 public class LonginController {
-     private Log log=LogFactory.getLog(LonginController.class);
+	private Log log = LogFactory.getLog(LonginController.class);
 	private ApplicationFactoryUtil applicationFactoryUtil;
 	private SimpleDateFormat sdf = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss.SSS");
-      @Resource(name="loginService")
-	 private LoginService loginService;
-      @Resource(name="freeReadCaptcha")
- 	 private FreeReadCaptcha freeReadCaptcha;
+	@Resource(name = "loginService")
+	private LoginService loginService;
+	@Resource(name = "freeReadCaptcha")
+	private FreeReadCaptcha freeReadCaptcha;
+
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.setValidator(new UserInfoValidator());
@@ -73,50 +74,60 @@ public class LonginController {
 	public String list(Map<String, Object> model) {
 		return "Login";
 	}
+
 	@RequestMapping("/image")
-	public void image(HttpServletResponse response){
-		String key=loginService.randomKey();
-		Cookie img=new Cookie("imgkey", key);
-		img.setMaxAge(120);//60s
+	public void image(HttpServletResponse response) {
+		String key = loginService.randomKey();
+		Cookie img = new Cookie("imgkey", key);
+		img.setMaxAge(120);// 60s
 		response.addCookie(img);
 		try {
-		String resString=freeReadCaptcha.getImage("", 1, response.getOutputStream());
-		loginService.addToCache(key,resString);
-		response.getOutputStream().flush();
+			String resString = freeReadCaptcha.getImage("", 1,
+					response.getOutputStream());
+			loginService.addToCache(key, resString);
+			response.getOutputStream().flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 	@RequestMapping("/hello")
-	public String hello(Map<String, Object> model) {
-		System.out.println("Come On..");
-		return "hello";
+	public String hello(String name, Map<String, Object> model) {
+		user_info user=loginService.getByCache(name);
+		model.put("user",user);  
+		 return "hello";
 	}
-    @ResponseBody
+
+	@ResponseBody
 	@RequestMapping("/userValidate")
-	public Map<String, String> list(@CookieValue("imgkey") String cookie,@Valid user_info user,String code, BindingResult result) {
-    	Map<String, String> resultMap=new HashMap<String, String>();
-    	if(cookie==null||cookie.equals("")){
-    		result.addError(new ObjectError("过期","验证码过期，请重新请求验证码"));
-    	}
-    	loginService.validateCaptchaWihtCookie(cookie,result,code);
-    	if(result.hasErrors()){
-    	List<ObjectError> errors=	result.getAllErrors();
-    	StringBuilder message=new StringBuilder();
-    		resultMap.put("status","error");
-    		for (ObjectError objectError : errors) {
-				message.append(objectError.getCode()+objectError.getObjectName()+objectError.getDefaultMessage());
+	public Map<String, String> list(@CookieValue("imgkey") String cookie,
+			@Valid user_info user, String code, BindingResult result) {
+		Map<String, String> resultMap = new HashMap<String, String>();
+		if (cookie == null || cookie.equals("")) {
+			result.addError(new ObjectError("过期", "验证码过期，请重新请求验证码"));
+		}
+		loginService.validateCaptchaWihtCookie(cookie, result, code);
+		if (result.hasErrors()) {
+			List<ObjectError> errors = result.getAllErrors();
+			StringBuilder message = new StringBuilder();
+			resultMap.put("status", "error");
+			for (ObjectError objectError : errors) {
+				message.append(objectError.getCode()
+						+ objectError.getObjectName()
+						+ objectError.getDefaultMessage());
 			}
-    		resultMap.put("message", message.toString());
-    		
-    	}else{
-    		//登陆成功后缓存标识
-    		String st=loginService.addToCache(user);	
-    		resultMap.put("key", st);
-    		resultMap.put("status", "sucess");
-    		resultMap.put("url", "hello");
-    	   log.info("登陆成功，存入缓存标识为st");
-    	}
+			resultMap.put("message", message.toString());
+
+		} else {
+			// 登陆成功后缓存标识
+			user.setLogin(true);
+			String st = loginService.addToCache(user);
+			resultMap.put("key", st);
+			resultMap.put("status", "sucess");
+			resultMap.put("url", "hello");
+			resultMap.put("id", st);// 该id需要返回以供查询
+			log.info("登陆成功，存入缓存标识为st");
+		}
 		return resultMap;
 	}
 }

@@ -18,6 +18,10 @@ public class user_info implements Serializable, FiledToShow {
 	private String address;// 用户住址
 
 	private String role;// 用户角色
+	
+	private boolean login;//是否已经登陆
+	
+	private int messagenum;//未读消息数目
 
 	public Integer getId() {
 		return id;
@@ -77,12 +81,17 @@ public class user_info implements Serializable, FiledToShow {
 		super();
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "user_info [id=" + id + ", password=" + password + ", name="
 				+ name + ", sex=" + sex + ", age=" + age + ", address="
-				+ address + "]";
+				+ address + ", role=" + role + ", login=" + login
+				+ ", messagenum=" + messagenum + "]";
 	}
+
+	
 
 	@Override
 	public int hashCode() {
@@ -91,9 +100,12 @@ public class user_info implements Serializable, FiledToShow {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((age == null) ? 0 : age.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (login ? 1231 : 1237);
+		result = prime * result + messagenum;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		return result;
 	}
@@ -122,6 +134,10 @@ public class user_info implements Serializable, FiledToShow {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (login != other.login)
+			return false;
+		if (messagenum != other.messagenum)
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -132,23 +148,17 @@ public class user_info implements Serializable, FiledToShow {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
+			return false;
 		if (sex == null) {
 			if (other.sex != null)
 				return false;
 		} else if (!sex.equals(other.sex))
 			return false;
 		return true;
-	}
-
-	public user_info(Integer id, String password, String name, String sex,
-			Integer age, String address) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.sex = sex;
-		this.age = age;
-		this.address = address;
 	}
 
 	public String[] whichFiledsToShow() {
@@ -162,6 +172,22 @@ public class user_info implements Serializable, FiledToShow {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public boolean isLogin() {
+		return login;
+	}
+
+	public void setLogin(boolean login) {
+		this.login = login;
+	}
+
+	public int getMessagenum() {
+		return messagenum;
+	}
+
+	public void setMessagenum(int messagenum) {
+		this.messagenum = messagenum;
 	}
 
 }

@@ -1,0 +1,21 @@
+$user
+<div class='container-fluid'>
+	#if($user.isLogin())
+	<div class='row'>
+		<div class='col-md-offset-8 col-lg-offset-8 col-md-2 col-lg-2'>
+			欢迎您!<a>亲爱的书友$user.name</a>
+		</div>
+		<div class='col-md-2 col-lg-2'>
+			<a>消息$user.messagenum</a>
+		</div>
+	</div>
+	#else
+	<div class='row'>
+		<div class='col-md-offset-8 col-lg-offset-8 col-md-2 col-lg-2'>
+			<a>登陆</a>
+		</div>
+		<div class='col-md-2 col-lg-2'>
+			<a>注册</a>
+		</div>
+	</div>
+	#end

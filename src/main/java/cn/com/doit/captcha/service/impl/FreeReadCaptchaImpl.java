@@ -3,6 +3,7 @@ package cn.com.doit.captcha.service.impl;
 import java.io.OutputStream;
 import java.util.Map;
 
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -65,5 +66,8 @@ public class FreeReadCaptchaImpl implements FreeReadCaptcha {
 	public void setGenerator(Generator generator) {
 		this.generator = generator;
 	}
-
+	@PreDestroy
+	public void close() {
+		System.out.println("销毁了---------------------------------");
+	}
 }
