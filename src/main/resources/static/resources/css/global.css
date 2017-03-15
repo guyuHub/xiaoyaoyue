@@ -1,0 +1,19 @@
+.header_top_bg{
+	background-color: #e8dfdb;
+}
+a:link { 
+color: #e0fefe;
+text-decoration:underline; 
+} 
+a:visited { 
+color:#e6f7d2; 
+text-decoration:none; 
+} 
+a:hover { 
+color:#ff0000; 
+text-decoration:none; 
+} 
+a:active { 
+color:#000000; 
+text-decoration:none; 
+} 
