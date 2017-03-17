@@ -1,23 +1,18 @@
+ #if(!$user)
+ <div class='container-fluid header_top_bg'>
+ <div class='row'>
+		<div class='pull-right'>
+			<a>登陆</a> | <a>注册</a>
+		</div>
+	</div>
+	</div>
+ #elseif($user.isLogin())
 <div class='container-fluid header_top_bg'>
-	#if($user.isLogin())
 	<div class='row'>
-		<div class='col-md-offset-8 col-lg-offset-8 col-md-2 col-lg-2'>
-			欢迎您!<a>亲爱的书友$user.name</a>  |
-		</div>
-		<div class='col-md-1 col-lg-1'>
-			<a>消息<span class="badge">$user.messagenum</span></a>|
-		</div>
-		<div class='col-md-1 col-lg-1'>
-			<a>退出</span></a>
+		<div class='pull-right'>
+			欢迎您!<a>亲爱的书友$user.name</a> | <a>消息<span class="badge">$user.messagenum</span></a>
+			| <a>退出</span></a>
 		</div>
 	</div>
-	#else
-	<div class='row'>
-		<div class='col-md-offset-10 col-lg-offset-10 col-md-1 col-lg-1'>
-			<a>登陆</a>|
-		</div>
-		<div class='col-md-1 col-lg-1'>
-			<a>注册</a>
-		</div>
 	</div>
-	#end
+#end

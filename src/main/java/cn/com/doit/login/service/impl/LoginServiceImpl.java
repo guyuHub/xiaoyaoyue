@@ -32,10 +32,7 @@ import com.aerospike.client.policy.Policy;
 import com.aerospike.client.policy.WritePolicy;
 
 import cn.com.doit.login.service.LoginService;
-import cn.com.doit.pojo.login.student_info;
-import cn.com.doit.pojo.login.student_infoExample;
 import cn.com.doit.pojo.login.user_info;
-import cn.com.doit.pojo.login.mapper.student_infoMapper;
 import cn.com.doit.util.JiaMiUtil;
 
 @Configuration(value = "loginService")
@@ -55,7 +52,10 @@ public class LoginServiceImpl implements LoginService {
 
 		return true;
 	}
-
+   /**
+    * @param user:将要存入as缓存的user_info对象
+    * @return Sring: 返回存入对象的key，用以构造as的key，进行查询或操作
+    */
 	public String addToCache(user_info user) {
 		String writekey = JiaMiUtil.MessageDigest(user.getName());
 		// 构造key和record
@@ -76,7 +76,10 @@ public class LoginServiceImpl implements LoginService {
 		return writekey;
 	}
 
-	
+	/**
+	 * @param key:用以构造as查询的key
+	 * @return user_info:返回该key对应as中的user_info对象,若没有则返回null
+	 */
 	public user_info getByCache(String key) {
 
 		Key readKey = new Key("freeRead", "login", key);
@@ -91,11 +94,13 @@ public class LoginServiceImpl implements LoginService {
 
 	// 用于转换缓存记录为user_info
 	private user_info convert(Record red) {
-		// ReflectionUtils bb;
-		user_info user = new user_info();
+		user_info user=null;
+		if(red!=null&&red.getString("name")!=null){
+			user  = new user_info();
 		user.setName(red.getString("name"));
 		user.setRole(red.getString("role"));
 		user.setLogin(Boolean.parseBoolean(red.getString("islogin")));
+	   }
 		return user;
 	}
 
@@ -108,12 +113,11 @@ public class LoginServiceImpl implements LoginService {
 		return imgKey;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * cn.com.doit.login.service.LoginService#validateCaptchaWihtCookie(java
-	 * .lang.String, org.springframework.validation.BindingResult)
+	/**
+	 * @param cookie:传入的cookie值
+	 * @param result:结果对象
+	 * @param code：用户输入的验证码
+	 * 根据cookie从as中获取对应存入的验证吗与客户输入的验证码进行匹配
 	 */
 	public void validateCaptchaWihtCookie(String cookie, BindingResult result,
 			String code) {
@@ -125,6 +129,11 @@ public class LoginServiceImpl implements LoginService {
 			result.addError(new ObjectError("造假", "孤灭了你"));
 		}
 	}
+	/**
+	 * @param key:存入as中的key
+	 * @param value:存入as中的值
+	 * 将生成的验证码字符串根据指定的Key存入as中
+	 */
 	public void addToCache(String key, String value) {
 
 		Key writekey = new Key("freeRead", "session", key);
@@ -145,9 +154,9 @@ public class LoginServiceImpl implements LoginService {
 			Key readKey = new Key("freeRead", "session", key);
 			Record red = asClient.get(readPolicy, readKey);
 			String result = red.getString("value");
-			if (red != null) {
-				boolean record = asClient.delete(writePolicy, readKey);
-			}
+//			if (red != null) {
+//				boolean record = asClient.delete(writePolicy, readKey);
+//			}
 			return result;
 		} catch (AerospikeException e) {
 			log.error(e);

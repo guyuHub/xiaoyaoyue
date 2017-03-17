@@ -45,7 +45,9 @@ import ch.qos.logback.core.db.BindDataSourceToJNDIAction;
 import cn.com.doit.Validator.custom.UserInfoValidator;
 import cn.com.doit.captcha.service.FreeReadCaptcha;
 import cn.com.doit.login.service.LoginService;
+import cn.com.doit.pojo.login.student_info;
 import cn.com.doit.pojo.login.user_info;
+//import cn.com.bsfit.doit.z.test.schedule.TestScheduleDongTai;
 import cn.com.doit.util.ApplicationFactoryUtil;
 import cn.com.doit.util.ExtJSResponse;
 import cn.com.doit.util.ModelToView;
@@ -90,7 +92,17 @@ public class LonginController {
 		}
 	}
 
-	
+	@RequestMapping("/main")
+	public String hello(String name, Map<String, Object> model) {
+		user_info user=null;
+		if(name==null||name.equals("")){
+			
+		}
+		 user=loginService.getByCache(name);
+		model.put("user",user);  
+		 return "main";
+	}
+
 	@ResponseBody
 	@RequestMapping("/userValidate")
 	public Map<String, String> list(@CookieValue("imgkey") String cookie,
