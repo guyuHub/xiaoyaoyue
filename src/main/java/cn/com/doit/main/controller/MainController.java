@@ -39,11 +39,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
 import ch.qos.logback.core.db.BindDataSourceToJNDIAction;
 import cn.com.doit.Validator.custom.UserInfoValidator;
 import cn.com.doit.captcha.service.FreeReadCaptcha;
 import cn.com.doit.login.service.LoginService;
+import cn.com.doit.main.service.MainService;
 import cn.com.doit.pojo.login.user_info;
+import cn.com.doit.pojo.main.MenuNode;
 //import cn.com.bsfit.doit.z.test.schedule.TestScheduleDongTai;
 import cn.com.doit.util.ApplicationFactoryUtil;
 import cn.com.doit.util.ExtJSResponse;
@@ -59,6 +62,8 @@ public class MainController {
 			"yyyy-MM-dd HH:mm:ss.SSS");
 	@Resource(name = "loginService")
 	private LoginService loginService;
+	@Resource(name = "mainService")
+	private MainService mainService;
 	@Resource(name = "freeReadCaptcha")
 	private FreeReadCaptcha freeReadCaptcha;
 /**
@@ -74,8 +79,9 @@ public class MainController {
 			
 		}
 		 user=loginService.getByCache(name);
-		 
-		model.put("user",user);  
+		 List<MenuNode> menus=mainService.showMenus(user);
+		model.put("user",user);
+		model.put("menus",menus);  
 		 return "main";
 	}
 

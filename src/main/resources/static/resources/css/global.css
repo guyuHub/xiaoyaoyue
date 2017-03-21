@@ -1,3 +1,6 @@
+body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
+	font-family: PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif;
+	}
 .header_top_bg{
 	background-color: #e8dfdb;
 }

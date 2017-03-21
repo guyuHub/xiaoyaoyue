@@ -1,16 +1,18 @@
 package cn.com.doit.pojo.main;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public class MenuNode implements Serializable {
+public class MenuNode implements Serializable,Comparable<MenuNode>{
 	private String Id; // 菜单Id
 	private String parentId; // 父菜单Id
-	private String leftId; // 兄菜单Id
-	private String rightId; // 第菜单Id
 	private String url; // 菜单url
 	private String imageUrl; // 菜单图标url
 	private String title; // 菜单名称
-	private String firstChirdlen; //第一个子菜单Id
+	private int brotherSeq; 
+	private ArrayList<Object> Chirdlen;
+	private int type; //0:非叶节点 1：叶子节点
+	private int roleLeav;//菜单所属权限
 	
 	public String getId() {
 		return Id;
@@ -28,20 +30,13 @@ public class MenuNode implements Serializable {
 		this.parentId = parentId;
 	}
 
-	public String getLeftId() {
-		return leftId;
+
+	public int getType() {
+		return type;
 	}
 
-	public void setLeftId(String leftId) {
-		this.leftId = leftId;
-	}
-
-	public String getRightId() {
-		return rightId;
-	}
-
-	public void setRightId(String rightId) {
-		this.rightId = rightId;
+	public void setType(int type) {
+		this.type = type;
 	}
 
 	public String getUrl() {
@@ -68,13 +63,56 @@ public class MenuNode implements Serializable {
 		this.title = title;
 	}
 
-	public String getFirstChirdlen() {
-		return firstChirdlen;
+
+	public int getBrotherSeq() {
+		return brotherSeq;
 	}
 
-	public void setFirstChirdlen(String firstChirdlen) {
-		this.firstChirdlen = firstChirdlen;
+	public void setBrotherSeq(int brotherSeq) {
+		this.brotherSeq = brotherSeq;
 	}
+
+	public ArrayList getChirdlen() {
+		return Chirdlen;
+	}
+
+	public void setChirdlen(ArrayList chirdlen) {
+		Chirdlen = chirdlen;
+	}
+
+	@Override
+	public String toString() {
+		return "MenuNode [Id=" + Id + ", parentId=" + parentId + ", url=" + url
+				+ ", imageUrl=" + imageUrl + ", title=" + title
+				+ ", brotherSeq=" + brotherSeq + ", Chirdlen=" + show(Chirdlen)
+				+ ", type=" + type + "]";
+	}
+
+	/**
+	 * @param chirdlen2
+	 * @return
+	 */ 
+	private String show(ArrayList<Object> chirdlen2) {
+		String result="";
+		if(chirdlen2==null){
+			return "--";
+		}
+		for (Object object : chirdlen2) {	
+			if(object instanceof MenuNode){
+				result=result+((MenuNode)object).toString();
+				 
+			}
+		} 
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(MenuNode o) {	
+		return this.getBrotherSeq()-o.getBrotherSeq();
+	}
+
 
 
 }
