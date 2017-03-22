@@ -1,16 +1,23 @@
-package cn.com.doit.pojo.login.service;
+package cn.com.doit.login.service;
 
-import java.util.List;
+import org.springframework.validation.BindingResult;
+import cn.com.doit.pojo.login.user_info;
 
-import cn.com.doit.pojo.login.student_info;
 
-
-public interface StudentBO {
-	List<student_info> list(String userName);
+public interface LoginService {
 	
-	void add(student_info student);
+    public boolean queryBySql(String name,String password);
+
+    public String addToCache(user_info user);
 	
-	void delete(Integer student);
+    public user_info getByCache(String key);
 	
-	void update(student_info student);
+    public String randomKey();
+    public void addToCache(String key,String value);
+
+	/**
+	 * @param cookie
+	 * @param result
+	 */
+	public void validateCaptchaWihtCookie(String cookie, BindingResult result,String code);
 }

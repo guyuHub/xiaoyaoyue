@@ -1,3 +1,31 @@
-#foreach($s in $data)  
-    <h1 style="color: crimson">访问数据 $s</h1>    
-#end  
+<!-- 主菜单部分 -->
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class='row'>
+			#foreach($menuNode in $menus )
+			#if($menuNode.Chirdlen)
+			<div class="col-md-2 col-lg-2">
+				<div class="navbar-header">
+					#menus($menuNode.Chirdlen)
+					</ul>
+				</div>
+			</div>
+			#else
+			<div class="col-md-2 col-lg-2">
+				<div class="navbar-header">
+					<ul class="nav navbar-nav">
+						<li><span class="navbar-text"><font color="#ffffff">$menuNode.title </font></span>
+						#if($menuNode.imageUrl)
+						<a class="navbar-brand" href="#">
+						 <img alt="Brand" src="...">
+						</a>
+						#end
+						</li>
+					</ul>
+				</div>
+			</div>
+				#end
+				#end
+		</div>
+	</div>
+</nav>

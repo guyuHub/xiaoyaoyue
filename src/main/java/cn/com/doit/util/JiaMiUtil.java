@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -65,11 +66,21 @@ public class JiaMiUtil {
 		return "IOException";
 	}
 	   }
-  //DES块加密算法
-  public Object DEScrypTion(Object date,String key,boolean mode) throws Exception{
-	  MessageDigest md=MessageDigest.getInstance("MD5");
-   return null;
-  }
+  //字符串MD5加密
+  public static String MessageDigest(String str) {
+	    try {
+	        // 生成一个MD5加密计算摘要
+	        MessageDigest md = MessageDigest.getInstance("MD5");
+	        // 计算md5函数
+	        md.update(str.getBytes());
+	        // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
+	        // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
+	        return new BigInteger(1, md.digest()).toString(16);
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    	return "MD5加密错误";
+	    }
+	}
   public  String stringToHexString(String s) {  
       String str = "";  
       for (int i = 0; i < s.length(); i++) {  
@@ -79,6 +90,9 @@ public class JiaMiUtil {
       }  
       return str;  
   }  
+  public static void main(String[] args) {
+	System.out.println(JiaMiUtil.MessageDigest("谷雨"));
+}
 public String getAlgorithmName() {
 	return algorithmName;
 }
