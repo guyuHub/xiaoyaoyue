@@ -85,6 +85,7 @@ public class MainServiceImpl implements MainService {
 	 * @param allMap
 	 */
 	private void buildParentTree(MenuNode menuNode, Map allMap) {
+	try {
 		MenuNode parent = (MenuNode) allMap.get(menuNode.getParentId());
 		ArrayList<MenuNode> ch;
 		if (parent.getChirdlen() == null) {
@@ -96,6 +97,9 @@ public class MainServiceImpl implements MainService {
 		ch.add(menuNode);
 		Collections.sort(ch);
 		parent.setChirdlen(ch);
+	} catch (Exception e) {
+		System.out.println(menuNode.getId()+"-----------"+menuNode.getParentId());
+	}
 
 	}
 
@@ -156,6 +160,14 @@ public class MainServiceImpl implements MainService {
 		xh.setImageUrl(null);
 		xh.setType(1);
 		xh.setTitle("玄幻");
+		
+		MenuNode dfxh = new MenuNode();
+		dfxh.setId("100017");
+		dfxh.setParentId("100007");
+		dfxh.setBrotherSeq(7);
+		dfxh.setImageUrl(null);
+		dfxh.setType(1);
+		dfxh.setTitle("东方玄幻");
 		MenuNode qh = new MenuNode();
 		qh.setId("100008");
 		qh.setParentId("100001");
@@ -183,6 +195,7 @@ public class MainServiceImpl implements MainService {
 		MenuNodes.add(xh);
 		MenuNodes.add(zpfl);
 		MenuNodes.add(qbzp);
+		MenuNodes.add(dfxh);
 		MenuNodes.add(ph);
 		MenuNodes.add(wb);
 		MenuNodes.add(mf);

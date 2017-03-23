@@ -1,31 +1,40 @@
 <!-- 主菜单部分 -->
 <nav class="navbar navbar-inverse">
-	<div class="container-fluid">
+	<div class="container-fluid">	
 		<div class='row'>
-			#foreach($menuNode in $menus )
-			#if($menuNode.Chirdlen)
-			<div class="col-md-2 col-lg-2">
-				<div class="navbar-header">
-					#menus($menuNode.Chirdlen)
+				#foreach($menuNode in $menus )
+				#if($menuNode.Chirdlen)
+				<div class="col-md-2 col-lg-2">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+					     <a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> 
+						<font color="#ffffff">$menuNode.title</font>
+							<span class="caret"></span>
+					</a> 
+					#if($menuNode.imageUrl)
+					<a class="navbar-brand" href="#"> <imgalt="Brand"></a>
+					#end
+					#menus($menuNode.Chirdlen)</li>
 					</ul>
-				</div>
-			</div>
-			#else
-			<div class="col-md-2 col-lg-2">
-				<div class="navbar-header">
-					<ul class="nav navbar-nav">
-						<li><span class="navbar-text"><font color="#ffffff">$menuNode.title </font></span>
+				 </div>
+				    #else
+				   <div class="col-md-2 col-lg-2">
+				   <ul class="nav navbar-nav">
+					<li><span class="navbar-text"><font color="#ffffff">$menuNode.title
+						</font></span>
 						#if($menuNode.imageUrl)
-						<a class="navbar-brand" href="#">
-						 <img alt="Brand" src="...">
-						</a>
-						#end
-						</li>
+						<a class="navbar-brand" href="#"> <imgalt="Brand" src="...">
+					</a> #end
+					</li>
 					</ul>
 				</div>
-			</div>
 				#end
-				#end
+			 #end
+			
 		</div>
+		
+	</div>
 	</div>
 </nav>
