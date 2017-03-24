@@ -3,48 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/freeRead/bootstrap/css/bootstrap.min.css"
-	type="text/css" />
-<link rel="stylesheet" href="/resources/css/global.css"
-	type="text/css" />
+<link rel="stylesheet" href="/freeRead/bootstrap/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="/resources/css/global.css" type="text/css" />
+<link href="/resources/css/animate.css" rel="stylesheet" />
+<link href="/resources/css/bootsnav.css" rel="stylesheet" />
+<link href="/resources/css/overwrite.css" rel="stylesheet" />
 <script type="text/javascript" src="/resources/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="/freeRead/bootstrap/js/bootstrap.js"></script>
 </head>
 <body>
-#macro(menus $parent)
-<ul class="dropdown-menu">
-#foreach($child in $parent)
-#if($child.Chirdlen)
-<li>
-	<ul class="nav navbar-nav">
-	<li class="dropdown">
-		<a href="#" class="dropdown-toggle"data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-			<font color="#000000">$child.title</font>
-		    <span class="caret"></span>
-		 </a> 
-		#if($child.imageUrl)
-		   <a class="navbar-brand" href="#"> <imgalt="Brand"></a>
-		 #end
-		#menus($child.Chirdlen)
-	</li>
-	</ul>
-</li>
-#else
-<li>
-<span class="navbar-text">
-<font color="#000000">$child.title </font>
-</span>
-#if($child.imageUrl)
-<a class="navbar-brand" href="#">
-	<img alt="Brand" src="...">
-</a>
-#end
-</li>
-#end
-#end
-</ul>
-#end
-#parse("/layout/header.html") 
+ #parse("/layout/header.html")
 $screen_content
 </body>
 </html>

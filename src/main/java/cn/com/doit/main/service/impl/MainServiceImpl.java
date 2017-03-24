@@ -50,10 +50,13 @@ public class MainServiceImpl implements MainService {
 		List<MenuNode> MenuNodes = processMenuNodes(createMenus());
 		return MenuNodes;
 	}
-
+	public List<MenuNode> showCloumMenus(user_info user) {
+		List<MenuNode> MenuNodes = processMenuNodes(createCloumMenus());
+		return MenuNodes;
+	}
 	@Test
 	public void test() {
-		List<MenuNode> root = processMenuNodes(createMenus());
+		List<MenuNode> root = processMenuNodes(createCloumMenus());
 		for (MenuNode menuNode : root) {
 			System.out.println(menuNode.toString());
 		}
@@ -65,15 +68,12 @@ public class MainServiceImpl implements MainService {
 		for (MenuNode menuNode : MenuNodes) {
 			allMap.put(menuNode.getId(), menuNode);
 		}
-
 		for (MenuNode menuNode : MenuNodes) {
-
-			if (menuNode.getParentId() != null
-					&& (!"".equals(menuNode.getParentId()))) {// 叶子节点
 				buildParentTree(menuNode, allMap);
-			} else {
-				root.add(menuNode);
-			}
+				if(!menuNode.getId().equals("100017")){
+					root.add(menuNode);			
+				}
+				
 		}
 		allMap = null;
 		Collections.sort(root);
@@ -88,15 +88,17 @@ public class MainServiceImpl implements MainService {
 	try {
 		MenuNode parent = (MenuNode) allMap.get(menuNode.getParentId());
 		ArrayList<MenuNode> ch;
-		if (parent.getChirdlen() == null) {
-			ch = new ArrayList<MenuNode>();
-		} else {
-			ch = parent.getChirdlen();
+		if(parent!=null){
+			if (parent.getChirdlen() == null) {
+				ch = new ArrayList<MenuNode>();
+			} else {
+				ch = parent.getChirdlen();
+			}
+			ch.add(menuNode);
+			Collections.sort(ch);
+			parent.setChirdlen(ch);
 		}
-
-		ch.add(menuNode);
-		Collections.sort(ch);
-		parent.setChirdlen(ch);
+	
 	} catch (Exception e) {
 		System.out.println(menuNode.getId()+"-----------"+menuNode.getParentId());
 	}
@@ -152,22 +154,24 @@ public class MainServiceImpl implements MainService {
 		zjzq.setImageUrl(null);
 		zjzq.setType(0);
 		zjzq.setTitle("作家专区");
-
+		MenuNodes.add(zpfl);
+		MenuNodes.add(qbzp);
+		MenuNodes.add(ph);
+		MenuNodes.add(wb);
+		MenuNodes.add(mf);
+		MenuNodes.add(zjzq);
+		return MenuNodes;
+	}
+	public  List<MenuNode> createCloumMenus(){
+		List<MenuNode> MenuNodes = new ArrayList<MenuNode>();
 		MenuNode xh = new MenuNode();
 		xh.setId("100007");
 		xh.setParentId("100001");
 		xh.setBrotherSeq(7);
 		xh.setImageUrl(null);
-		xh.setType(1);
+		xh.setType(0);
 		xh.setTitle("玄幻");
-		
-		MenuNode dfxh = new MenuNode();
-		dfxh.setId("100017");
-		dfxh.setParentId("100007");
-		dfxh.setBrotherSeq(7);
-		dfxh.setImageUrl(null);
-		dfxh.setType(1);
-		dfxh.setTitle("东方玄幻");
+
 		MenuNode qh = new MenuNode();
 		qh.setId("100008");
 		qh.setParentId("100001");
@@ -190,16 +194,10 @@ public class MainServiceImpl implements MainService {
 		xx.setType(1);
 		xx.setTitle("仙侠");
 		MenuNodes.add(xx);
+
 		MenuNodes.add(wx);
 		MenuNodes.add(qh);
 		MenuNodes.add(xh);
-		MenuNodes.add(zpfl);
-		MenuNodes.add(qbzp);
-		MenuNodes.add(dfxh);
-		MenuNodes.add(ph);
-		MenuNodes.add(wb);
-		MenuNodes.add(mf);
-		MenuNodes.add(zjzq);
-		return MenuNodes;
+	  return MenuNodes;
 	}
 }

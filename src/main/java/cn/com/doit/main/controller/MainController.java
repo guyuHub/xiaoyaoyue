@@ -80,8 +80,10 @@ public class MainController {
 		}
 		 user=loginService.getByCache(name);
 		 List<MenuNode> menus=mainService.showMenus(user);
+		 List<MenuNode> cloumMenus=mainService.showCloumMenus(user);
 		model.put("user",user);
-		model.put("menus",menus);  
+		model.put("menus",menus);
+		model.put("cloumMenus",cloumMenus);  
 		 return "main";
 	}
 

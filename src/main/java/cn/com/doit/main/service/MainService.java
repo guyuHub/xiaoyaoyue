@@ -11,4 +11,5 @@ import cn.com.doit.pojo.main.MenuNode;
 
 public interface MainService {
           public List<MenuNode>  showMenus(user_info user);
+          public List<MenuNode>  showCloumMenus(user_info user);
 }

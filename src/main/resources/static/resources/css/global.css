@@ -1,8 +1,9 @@
 body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
 	font-family: PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif;
 	}
+
 .header_top_bg{
-	background-color: #e8dfdb;
+	background-color: #e4e9e9;
 }
 a:link { 
 color: #e0fefe;
@@ -21,5 +22,29 @@ color:#000000;
 text-decoration:none; 
 }
 #header_top_cloum{
-	padding : -150px;
+	padding : -150px;position_left
 }
+nav .position_left{
+        position: absolute;
+        width: 260px;
+        overflow: hidden;
+        left: 0;
+        padding: 0px
+        background: #080808;
+        box-shadow: 0px 0px 0px 0px #eee;
+    }  
+  .noPadding{
+  padding: 0px
+  }
+  .noMargin{
+  margin: 0px
+  }
+  .noSpaces{
+  width: 100%;
+  }
+  .vertical{
+ margin: 0px
+  }
+  .relative{
+  text-align:center
+  }
