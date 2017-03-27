@@ -5,9 +5,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/freeRead/bootstrap/css/bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="/resources/css/global.css" type="text/css" />
-<link href="/resources/css/animate.css" rel="stylesheet" />
-<link href="/resources/css/bootsnav.css" rel="stylesheet" />
-<link href="/resources/css/overwrite.css" rel="stylesheet" />
+<link rel="stylesheet" href="/resources/css/overwrite.css" type="text/css" />
 <script type="text/javascript" src="/resources/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="/freeRead/bootstrap/js/bootstrap.js"></script>
 </head>
