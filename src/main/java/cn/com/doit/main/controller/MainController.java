@@ -45,6 +45,7 @@ import cn.com.doit.Validator.custom.UserInfoValidator;
 import cn.com.doit.captcha.service.FreeReadCaptcha;
 import cn.com.doit.login.service.LoginService;
 import cn.com.doit.main.service.MainService;
+import cn.com.doit.pojo.book.Free_book_info;
 import cn.com.doit.pojo.login.user_info;
 import cn.com.doit.pojo.main.MenuNode;
 //import cn.com.bsfit.doit.z.test.schedule.TestScheduleDongTai;
@@ -64,8 +65,7 @@ public class MainController {
 	private LoginService loginService;
 	@Resource(name = "mainService")
 	private MainService mainService;
-	@Resource(name = "freeReadCaptcha")
-	private FreeReadCaptcha freeReadCaptcha;
+  
 /**
  * 
  * @param name 登陆用户的id值，根据此id值从as缓存中获取对象信息
@@ -86,5 +86,11 @@ public class MainController {
 		model.put("cloumMenus",cloumMenus);  
 		 return "main";
 	}
-
+	
+	@RequestMapping("/carouselBooks")
+	public Map<String, Object> carouselBooks(Map<String, Object> model) {
+		List<Free_book_info> cacheBooks=mainService.getCarouselBooks("carouselBooks");
+	   
+		return model;
+	}
 }

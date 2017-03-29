@@ -39,13 +39,17 @@ import com.aerospike.client.policy.WritePolicy;
 
 import cn.com.doit.login.service.LoginService;
 import cn.com.doit.main.service.MainService;
+import cn.com.doit.pojo.book.Free_book_info;
 import cn.com.doit.pojo.login.user_info;
 import cn.com.doit.pojo.main.MenuNode;
 import cn.com.doit.util.JiaMiUtil;
+import cn.com.doit.util.asReadPolicy;
+import cn.com.doit.util.cacheService;
 
 @Configuration(value = "mainService")
 public class MainServiceImpl implements MainService {
-
+ @Resource(name="cache")
+  private cacheService cache;
 	public List<MenuNode> showMenus(user_info user) {
 		List<MenuNode> MenuNodes = processMenuNodes(createMenus());
 		return MenuNodes;
@@ -199,5 +203,12 @@ public class MainServiceImpl implements MainService {
 		MenuNodes.add(qh);
 		MenuNodes.add(xh);
 	  return MenuNodes;
+	}
+	/* (non-Javadoc)
+	 * @see cn.com.doit.main.service.MainService#getCarouselBooks()
+	 */
+	public List<Free_book_info> getCarouselBooks(String key) {
+	      Record var=cache.read(asReadPolicy.newInstansce().setNamespace("freeRead").setSetname("circleRecommend").setKey(key));
+		return null;
 	}
 }
