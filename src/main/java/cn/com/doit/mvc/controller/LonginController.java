@@ -1,4 +1,4 @@
-package cn.com.doit.login.controller;
+package cn.com.doit.mvc.controller;
 
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -44,7 +44,7 @@ import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
 import ch.qos.logback.core.db.BindDataSourceToJNDIAction;
 import cn.com.doit.Validator.custom.UserInfoValidator;
 import cn.com.doit.captcha.service.FreeReadCaptcha;
-import cn.com.doit.login.service.LoginService;
+import cn.com.doit.mvc.service.LoginService;
 import cn.com.doit.pojo.login.user_info;
 import cn.com.doit.util.ApplicationFactoryUtil;
 import cn.com.doit.util.ExtJSResponse;
@@ -73,7 +73,7 @@ public class LonginController {
 		model.put("noheader", true);
 		return "Login";
 	}
-
+	
 	@RequestMapping("/image")
 	public void image(HttpServletResponse response) {
 		String key = loginService.randomKey();

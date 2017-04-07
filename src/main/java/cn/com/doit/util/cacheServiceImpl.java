@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import cn.com.doit.login.service.impl.LoginServiceImpl;
+import cn.com.doit.mvc.service.impl.LoginServiceImpl;
 
 import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.AerospikeException;

@@ -20,6 +20,7 @@ public class Free_book_info implements Serializable {
 	private int state;          // 书籍状态 0:新书上传 1：连载 2:完本
 	private String book_cover_url;// 书籍封面图片地址
 	private long number;        // 书籍字数
+//点击数，推荐数动态时间管理，初步考虑使用类似Timeitems对象	
 
 	public String getBook_name() {
 		return book_name;

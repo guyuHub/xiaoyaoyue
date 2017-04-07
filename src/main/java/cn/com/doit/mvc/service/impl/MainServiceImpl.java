@@ -1,4 +1,4 @@
-package cn.com.doit.main.service.impl;
+package cn.com.doit.mvc.service.impl;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -37,17 +37,20 @@ import com.aerospike.client.Record;
 import com.aerospike.client.policy.Policy;
 import com.aerospike.client.policy.WritePolicy;
 
-import cn.com.doit.login.service.LoginService;
-import cn.com.doit.main.service.MainService;
+import cn.com.doit.mvc.service.MainService;
+import cn.com.doit.mvc.service.LoginService;
 import cn.com.doit.pojo.book.Free_book_info;
 import cn.com.doit.pojo.login.user_info;
 import cn.com.doit.pojo.main.MenuNode;
 import cn.com.doit.util.JiaMiUtil;
 import cn.com.doit.util.asReadPolicy;
+import cn.com.doit.util.asWritePolicy;
 import cn.com.doit.util.cacheService;
 
 @Configuration(value = "mainService")
 public class MainServiceImpl implements MainService {
+	@Value(value="${baselUrl}")
+	private String baseUrl;
  @Resource(name="cache")
   private cacheService cache;
 	public List<MenuNode> showMenus(user_info user) {
@@ -73,10 +76,8 @@ public class MainServiceImpl implements MainService {
 			allMap.put(menuNode.getId(), menuNode);
 		}
 		for (MenuNode menuNode : MenuNodes) {
-				buildParentTree(menuNode, allMap);
-				if(!menuNode.getId().equals("100017")){
+				buildParentTree(menuNode, allMap);		
 					root.add(menuNode);			
-				}
 				
 		}
 		allMap = null;
@@ -197,18 +198,140 @@ public class MainServiceImpl implements MainService {
 		xx.setImageUrl(null);
 		xx.setType(1);
 		xx.setTitle("仙侠");
+		MenuNode ds = new MenuNode();
+		ds.setId("100011");
+		ds.setParentId("100001");
+		ds.setBrotherSeq(11);
+		ds.setImageUrl(null);
+		ds.setType(1);
+		ds.setTitle("都市");
+		MenuNode zc = new MenuNode();
+		zc.setId("100012");
+		zc.setParentId("100001");
+		zc.setBrotherSeq(12);
+		zc.setImageUrl(null);
+		zc.setType(1);
+		zc.setTitle("职场");
+		MenuNode js = new MenuNode();
+		js.setId("100013");
+		js.setParentId("100001");
+		js.setBrotherSeq(13);
+		js.setImageUrl(null);
+		js.setType(1);
+		js.setTitle("军事");
+		MenuNode ls = new MenuNode();
+		ls.setId("100014");
+		ls.setParentId("100001");
+		ls.setBrotherSeq(14);
+		ls.setImageUrl(null);
+		ls.setType(1);
+		ls.setTitle("历史");
+		MenuNode yx = new MenuNode();
+		yx.setId("100015");
+		yx.setParentId("100001");
+		yx.setBrotherSeq(15);
+		yx.setImageUrl(null);
+		yx.setType(1);
+		yx.setTitle("游戏");
+		MenuNode ty = new MenuNode();
+		ty.setId("100016");
+		ty.setParentId("100001");
+		ty.setBrotherSeq(16);
+		ty.setImageUrl(null);
+		ty.setType(1);
+		ty.setTitle("体育");
+		MenuNode kh = new MenuNode();
+		kh.setId("100017");
+		kh.setParentId("100001");
+		kh.setBrotherSeq(17);
+		kh.setImageUrl(null);
+		kh.setType(1);
+		kh.setTitle("科幻");
+		MenuNode ly = new MenuNode();
+		ly.setId("100018");
+		ly.setParentId("100001");
+		ly.setBrotherSeq(18);
+		ly.setImageUrl(null);
+		ly.setType(1);
+		ly.setTitle("灵异");
+		MenuNode ns = new MenuNode();
+		ns.setId("100019");
+		ns.setParentId("100001");
+		ns.setBrotherSeq(19);
+		ns.setImageUrl(null);
+		ns.setType(1);
+		ns.setTitle("女士");
+		MenuNode ecy = new MenuNode();
+		ecy.setId("100020");
+		ecy.setParentId("100001");
+		ecy.setBrotherSeq(20);
+		ecy.setImageUrl(null);
+		ecy.setType(1);
+		ecy.setTitle("二次元");
+		MenuNodes.add(ns);
+		MenuNodes.add(ecy);
+		MenuNodes.add(ly);
+		MenuNodes.add(kh);
+		MenuNodes.add(ty);
+		MenuNodes.add(yx);
+		MenuNodes.add(ls);
+		MenuNodes.add(js);
+		MenuNodes.add(zc);
+		MenuNodes.add(ds);
 		MenuNodes.add(xx);
-
 		MenuNodes.add(wx);
 		MenuNodes.add(qh);
 		MenuNodes.add(xh);
 	  return MenuNodes;
 	}
-	/* (non-Javadoc)
-	 * @see cn.com.doit.main.service.MainService#getCarouselBooks()
-	 */
+
+	
 	public List<Free_book_info> getCarouselBooks(String key) {
-	      Record var=cache.read(asReadPolicy.newInstansce().setNamespace("freeRead").setSetname("circleRecommend").setKey(key));
-		return null;
+		 List<Free_book_info> result=null;
+	      Record var=cache.read(asReadPolicy.newInstansce().setNamespace("freeRead").setSetname("circleRecommend").setKey(key).put("value"));
+		 if(var==null){
+			 System.out.println("-----no cache-------------");
+			result=serchFromSql();
+			cache.write(asWritePolicy.newInstansce().setNamespace("freeRead").setSetname("circleRecommend").setKey(key).put("value", result));
+			 return result;
+		 }
+		 result=convert(var);	 
+	      return result;
+	}
+	/**
+	 * @param var
+	 * @return
+	 */
+	private List<Free_book_info> convert(Record var) {
+        Object vars=var.getValue("value");
+		return (List<Free_book_info> )vars;
+	}
+
+	
+	private List<Free_book_info> serchFromSql() {
+		System.out.println(baseUrl);
+		//查询需要在轮播插件推荐的书籍信息
+		Free_book_info one =new Free_book_info();
+		one.setBook_author("张三");
+		one.setBook_cover_url(baseUrl+"resources/images/carousel/id1.jpg");
+		one.setBook_id("1001");
+		one.setBook_name("风戽");
+		
+		Free_book_info two =new Free_book_info();
+		two.setBook_author("李四");
+		two.setBook_cover_url(baseUrl+"resources/images/carousel/id2.jpg");
+		two.setBook_id("1002");
+		two.setBook_name("玉祁");
+		
+		Free_book_info three =new Free_book_info();
+		three.setBook_author("王五");
+		three.setBook_cover_url(baseUrl+"resources/images/carousel/id3.jpg");
+		three.setBook_id("1003");
+		three.setBook_name("泷灀");
+		List<Free_book_info> list=new ArrayList<Free_book_info>();
+		list.add(three);
+		list.add(one);
+		list.add(two);
+		return list;
 	}
 }

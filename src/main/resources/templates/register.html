@@ -1,0 +1,71 @@
+#set($layout = "/layout/register.vm")  
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/resources/css/register.css" type="text/css" />
+<div  class="container-fluid center">
+<div class="row">
+<div class="col-md-6 col-lg-6  col-sm-6 col-xs-6 
+col-md-offset-4 col-lg-offset-4 col-sm-offset-4 col-xs-offset-4">
+<form class="form-horizontal">
+  <div class="form-group">
+    <div class="col-md-8 col-lg-8  col-sm-8 col-xs-8">
+      <input type="tel" class="form-control" id="inputPhone" placeholder="手机号">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-5 col-lg-5  col-sm-5 col-xs-5">
+      <input type="tel" class="form-control" id="inputVal" placeholder="短信验证">
+    </div>
+    <div class="col-md-3 col-lg-3  col-sm-3 col-xs-3">
+      <input type="button" class="form-control leftText noPadding" id="inputVal" value="获取短信验证码">
+    </div>
+  </div>
+ <div class="form-group">
+    <div class="col-md-8 col-lg-8  col-sm-8 col-xs-8">
+      <input type="password" class="form-control" id="inputPassword" placeholder="设置密码">
+    </div>
+  </div>
+   <div class="form-group">
+    <div class="col-md-8 col-lg-8  col-sm-8 col-xs-8">
+      <input type="password" class="form-control" id="inputPasswordAgain" placeholder="请再次输入密码">
+    </div>
+  </div>
+   <div class="form-group">
+    <div class="col-md-8 col-lg-8  col-sm-8 col-xs-8">
+      <input type="password" class="form-control" id="inputName" placeholder="请输入昵称">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-8 col-lg-8  col-sm-8 col-xs-8">
+      <input type="button" class="form-control leftText noPadding" id="inputVal" value="立即注册">
+   </div>
+  </div>
+</form>
+
+</div>
+</div>
+</div>
+
+
+	<script type="text/javascript">
+		$(function() {
+			$("#send").click(
+					function() {
+						$.post("userValidate", $("#login").serialize(),
+								function(data, textStatus) {
+									var status = data.status;
+									if (status == "sucess") {
+										var url = data.url;
+										var id = data.id;
+										alert("ssss");
+										window.location.href = url+"?name="+id;
+									} else {
+										var message = data.message;
+										$("#error_show").text(message);
+									}
+
+								});
+					})
+		})
+	</script>
+
+</html>

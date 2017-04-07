@@ -1,4 +1,4 @@
-package cn.com.doit.main.controller;
+package cn.com.doit.mvc.controller;
 
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -43,8 +43,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ch.qos.logback.core.db.BindDataSourceToJNDIAction;
 import cn.com.doit.Validator.custom.UserInfoValidator;
 import cn.com.doit.captcha.service.FreeReadCaptcha;
-import cn.com.doit.login.service.LoginService;
-import cn.com.doit.main.service.MainService;
+import cn.com.doit.mvc.service.MainService;
+import cn.com.doit.mvc.service.LoginService;
 import cn.com.doit.pojo.book.Free_book_info;
 import cn.com.doit.pojo.login.user_info;
 import cn.com.doit.pojo.main.MenuNode;
@@ -84,13 +84,18 @@ public class MainController {
 		model.put("user",user);
 		model.put("menus",menus);
 		model.put("cloumMenus",cloumMenus);  
+		List<Free_book_info> cacheBooks=mainService.getCarouselBooks("carouselBooks");
+	    model.put("carouselBooks", cacheBooks);
 		 return "main";
 	}
-	
+	/*
+	 * 不能carouselBooks(Map<String, Object> model) {，用了后会去找页面，具体需要看源码，假期看下*/
+	@ResponseBody
 	@RequestMapping("/carouselBooks")
-	public Map<String, Object> carouselBooks(Map<String, Object> model) {
+	public Map<String, Object> carouselBooks() {
+		Map<String, Object> model=new HashMap<String, Object>();
 		List<Free_book_info> cacheBooks=mainService.getCarouselBooks("carouselBooks");
-	   
+	    model.put("carouselBooks", cacheBooks);
 		return model;
 	}
 }

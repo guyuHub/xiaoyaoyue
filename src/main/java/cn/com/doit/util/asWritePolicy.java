@@ -5,9 +5,12 @@ package cn.com.doit.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+
+import cn.com.doit.pojo.book.Free_book_info;
 
 import com.aerospike.client.Bin;
 import com.aerospike.client.Key;
@@ -20,14 +23,13 @@ import com.aerospike.client.policy.WritePolicy;
  */
 public class asWritePolicy {
     private WritePolicy writePolicy;
-	@Resource(name = "writePolicy")
-    private WritePolicy defaultPolicy;
+    private static WritePolicy defaultPolicy;
     private Map<String, Object> bins;
     private String setname;
     private String namespace;
     private String key;
     
-    public asWritePolicy newInstansce(){	
+    public static asWritePolicy newInstansce(){	
 		return new asWritePolicy(defaultPolicy);	
     }
     public asWritePolicy newInstansce(WritePolicy writePolicy){	
@@ -56,29 +58,47 @@ public class asWritePolicy {
 	}
 
 	public Bin[] getArrayBins() {
+		
 		if(bins!=null&&!bins.isEmpty()){
 			ArrayList<Bin> linshi=new ArrayList<Bin>(bins.size());
 			for (String  binName : bins.keySet()) {
 				Bin sb=new Bin(binName,bins.get(binName));
 				linshi.add(sb);
 			}
-			return (Bin[]) linshi.toArray();
+			Bin[] var=new Bin[linshi.size()];
+			return linshi.toArray(var);
 		}
 		return null;
 	}
-	public void setSetname(String setname) {
+	public asWritePolicy setSetname(String setname) {
 		this.setname = setname;
+		return this;
 	}
-	public void setNamespace(String namespace) {
+	public asWritePolicy setNamespace(String namespace) {
 		this.namespace = namespace;
+		return this;
 	}
-	public void setKey(String key) {
+	public asWritePolicy setKey(String key) {
 		this.key = key;
+		return this;
 	}
 	public Key getKey() {
 		if(namespace==null||setname==null||key==null)
 			return null;
 		return new Key(namespace, setname, key);
+	}
+	@Resource(name = "writePolicy")
+	public  void setDefaultPolicy(WritePolicy defaultPolicy) {
+		asWritePolicy.defaultPolicy = defaultPolicy;
+	}
+	/**
+	 * @param string
+	 * @param result
+	 * @return
+	 */
+	public asWritePolicy put(String string, Object result) {
+		this.getBins().put(string, result);
+		return this;
 	}
 	
 }

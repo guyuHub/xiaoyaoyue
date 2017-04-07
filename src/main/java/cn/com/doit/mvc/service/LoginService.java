@@ -1,4 +1,4 @@
-package cn.com.doit.login.service;
+package cn.com.doit.mvc.service;
 
 import org.springframework.validation.BindingResult;
 

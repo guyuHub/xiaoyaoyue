@@ -1,4 +1,4 @@
-package cn.com.doit.login.service.impl;
+package cn.com.doit.mvc.service.impl;
 
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -31,7 +31,7 @@ import com.aerospike.client.Record;
 import com.aerospike.client.policy.Policy;
 import com.aerospike.client.policy.WritePolicy;
 
-import cn.com.doit.login.service.LoginService;
+import cn.com.doit.mvc.service.LoginService;
 import cn.com.doit.pojo.login.user_info;
 import cn.com.doit.util.JiaMiUtil;
 

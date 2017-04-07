@@ -41,8 +41,9 @@ public class asReadPolicy {
 	}
 
 	public String[] getArrayBins() {
+		String [] var = new String[bins.size()];
 		if(bins!=null&&!bins.isEmpty()){
-			return (String[]) bins.toArray();
+			return  bins.toArray(var);
 		}
 		return null;
 	}
@@ -80,6 +81,14 @@ public class asReadPolicy {
 	  @Resource(name = "readPolicy")
 	public  void setDefaultPolicy(Policy defaultPolicy) {
 		asReadPolicy.defaultPolicy = defaultPolicy;
+	}
+	/**
+	 * @param string
+	 * @return
+	 */
+	public asReadPolicy put(String string) {
+		this.getBins().add(string);
+		return this;
 	}
 	
 }

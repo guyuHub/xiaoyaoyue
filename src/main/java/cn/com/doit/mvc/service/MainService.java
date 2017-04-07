@@ -1,4 +1,4 @@
-package cn.com.doit.main.service;
+package cn.com.doit.mvc.service;
 
 import java.util.List;
 

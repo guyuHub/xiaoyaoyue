@@ -1,12 +1,10 @@
-	<link rel="stylesheet" href="/resources/css/main.css" type="text/css" />
-<script type="text/javascript" src="/resources/js/main.js"></script>
-	<div class="container-fluid noPadding" id="spaces"> 
+<link rel="stylesheet" href="/resources/css/main.css" type="text/css" />
 	<!-- 横放菜单部分 -->
-	<nav class="navbar navbar-inverse noMargin">
+	<nav  class="navbar navbar-inverse noMargin">
 		<div class="container-fluid">
 			<div class='row'>
 				#foreach($menuNode in $menus )
-				<div class="col-md-2 col-lg-2">
+				<div class="col-md-2 col-lg-2  col-sm-2 col-xs-2 maxHE">
 					<ul class="nav navbar-nav noSpaces">
 					<li class="noSpaces"><a class="navbar-brand noPadding noSpaces" href="#"> 
 					<span class="navbar-text vertical noSpaces relative"><font class="noSpaces" color="#ffffff">$menuNode.title
@@ -19,40 +17,79 @@
 				#end
 			</div>
 		</div>
-</nav>
+ </nav>
 	<!-- 竖直菜单部分 -->
-	<div class="container-fluid">
+	<div  class="container-fluid ">
 	<div class="row">
-		<div class="col-md-2 col-lg-2">		
+		<div  id="liebiao" class="col-md-2 col-lg-2 col-sm-2 col-xs-2 noPadding">		
 			 #set($jishu=0)
 					#foreach($cloumNode in $cloumMenus)
-					    #if($foreach.index%2==0)
+					       #if($foreach.index%2==0)
 					        #if($jishu%2==0)
 					        <div class="row even">			   
 					         #set($jishu=$jishu+1)
 					         #else
 					        <div class="row odd">	
 					         #set($jishu=$jishu+1)
-					         #end
-				    	#end		
-					<div class="col-md-6 col-lg-6">	
-					  <ul class="nav navbar-nav">	
-					<li>
-					<a class="navbar-brand noPadding" href="#">
-					<span
-							class="navbar-text vertical  relative">
-							<font color="#000000">$cloumNode.title</font></span>
-							#if($cloumNode.imageUrl) <img alt="Brand" src="..."> #end
-					    </a>
-					</li>	
-						 </ul>					
+					          #end
+				     #end		
+					<div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 maxHE">	
+					  <ul class="nav navbar-nav noSpaces" >	
+					      <li>
+					            <a class="navbar-brand noPadding" href="#">
+					                <span class="navbar-text vertical  relative">
+							           <font class="fontsize" color="#000000">$cloumNode.title</font>
+							         </span>
+							                 #if($cloumNode.imageUrl)
+							                 <img alt="Brand" src="..."> 
+							                 #end
+					             </a>
+				        </li>	
+					  </ul>					
 					 </div>
-					    #if($foreach.index%2!=0)
-					      </div>
-				    	#end
+					          #if($foreach.index%2!=0||!$foreach.hasNext)
+					          </div>
+				    	      #end
 					 #end
                    </div>
-	<div class="col-md-8 col-lg-8">
-	<div class="even">ssss</div>
+	<div id="carouselBooks" class="col-md-8 col-lg-8 col-sm-8 col-xs-8">
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- 轮播（Carousel）项目 -->
+    <div class="carousel-inner">
+         #set($itemjishu=0)
+        #foreach($book in $carouselBooks)
+        #if($itemjishu==0)
+         <div class="item active">
+          #set($itemjishu=$itemjishu+1)
+        #else
+        <div class="item">
+        #end
+
+            <span class="carousel-caption block">
+ <font class="fontsize pull-left" color="#000000">$book.book_name</font></span>
+            <img src="$book.book_cover_url" class="img" alt="$book.book_name">
+        </div>
+        #end
+    </div>
+        <!-- 轮播（Carousel）导航 -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+   <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+	  <!-- 轮播（Carousel）指标 -->
+	  <div>
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active pull-right"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class="pull-right"></li>
+        <li data-target="#myCarousel" data-slide-to="2" class="pull-right"></li>
+    </ol>
+    </div>
 	</div>
-	</div></div>
+        </div>
+		</div>
+		</div>
+<script type="text/javascript" src="/resources/js/main.js"></script>
