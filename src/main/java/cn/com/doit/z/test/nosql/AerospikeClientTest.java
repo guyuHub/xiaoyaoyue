@@ -13,7 +13,7 @@ import com.aerospike.client.policy.Policy;
 import com.aerospike.client.policy.WritePolicy;
 
 public class AerospikeClientTest {
-	public String host = "192.168.49.111";
+	public String host = "192.168.243.111";
 	public int port = 3000;
 
 	// As连接测试
