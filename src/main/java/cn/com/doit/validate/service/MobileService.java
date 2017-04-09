@@ -3,10 +3,12 @@
  */
 package cn.com.doit.validate.service;
 
+import cn.com.doit.validate.service.impl.ResponseResult;
+
 /**
  * @author Administrator
  *
  */
 public interface MobileService {
-   public String sendMsg(String phoneNum,String msg);
+   public ResponseResult sendMsg(String phoneNum,String msg);
 }
