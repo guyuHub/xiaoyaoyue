@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import cn.com.doit.login.controller.LonginController;
+import cn.com.doit.mvc.controller.LonginController;
 
 import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.policy.Policy;

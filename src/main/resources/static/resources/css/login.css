@@ -9,9 +9,9 @@
 }
 .form-horizontal{
     background: #fff;
-    padding-bottom: 40px;
+    margin-top: 40px;
     border-radius: 15px;
-    text-align: center;
+/*     text-align: center; */
 }
 .form-horizontal .heading{
     display: block;

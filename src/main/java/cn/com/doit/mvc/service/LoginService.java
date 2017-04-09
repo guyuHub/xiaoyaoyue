@@ -1,10 +1,12 @@
-package cn.com.doit.login.service;
+package cn.com.doit.mvc.service;
 
 import org.springframework.validation.BindingResult;
+
 import cn.com.doit.pojo.login.user_info;
+import cn.com.doit.util.cacheService;
 
 
-public interface LoginService {
+public interface LoginService{
 	
     public boolean queryBySql(String name,String password);
 
