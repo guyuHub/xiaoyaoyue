@@ -1,4 +1,8 @@
-#set($layout = "/layout/register.vm")  
+#set($layout = "/layout/register.vm")
+#set($value="手机")
+#if($name=="邮箱")
+#set($value="邮箱")
+#end
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/register.css" type="text/css" />
 <div  class="container-fluid center">
@@ -8,15 +12,15 @@ col-md-offset-4 col-lg-offset-4 col-sm-offset-4 col-xs-offset-4">
 <form class="form-horizontal">
   <div class="form-group">
     <div class="col-md-8 col-lg-8  col-sm-8 col-xs-8">
-      <input type="tel" class="form-control" id="inputPhone" placeholder="手机号">
+      <input type="tel" class="form-control" id="inputPhone" placeholder="$value号">
     </div>
   </div>
   <div class="form-group">
     <div class="col-md-5 col-lg-5  col-sm-5 col-xs-5">
-      <input type="tel" class="form-control" id="inputVal" placeholder="短信验证">
+      <input type="tel" class="form-control" id="inputVal" placeholder="$value验证">
     </div>
     <div class="col-md-3 col-lg-3  col-sm-3 col-xs-3">
-      <input type="button" class="form-control leftText noPadding" id="inputVal" value="获取短信验证码">
+      <input type="button" class="form-control leftText noPadding" id="inputVal" value="获取$value验证码">
     </div>
   </div>
  <div class="form-group">

@@ -65,7 +65,7 @@ public class RegisterController {
 	//注册页面
 	@RequestMapping("/register")
 	public String register(Map<String, Object> model) {
-		model.put("noheader", true);
+		model.put("name","邮箱");
 		return "register";
 	}
 
