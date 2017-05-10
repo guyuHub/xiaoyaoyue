@@ -42,7 +42,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		
-		<table schema="demo" tableName="student_info" domainObjectName="student_info">
+		<table tableName="book" domainObjectName="book">
 			<property name="useActualColumnNames" value="false" />
 			<property name="constructorBased" value="true" />
 			<property name="ignoreQualifiersAtRuntime" value="true" />

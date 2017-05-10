@@ -53,7 +53,7 @@ import cn.com.doit.validate.service.MobileService;
  * @author Administrator
  *
  */
-@Configuration(value = "emailService")
+//@Configuration(value = "emailService")
 public class EmailServiceImpl implements EmailService {
 	private CloseableHttpClient httpClient;
 	private HttpPost request;
