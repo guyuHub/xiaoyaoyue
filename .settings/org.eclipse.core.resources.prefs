@@ -1,9 +1,13 @@
 eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
 encoding//src/main/java/cn/com/doit/bo/login/service/StudentService.java=UTF-8
 encoding//src/main/java/cn/com/doit/cfg/Dbconfig.java=UTF-8
 encoding//src/main/java/cn/com/doit/cfg/MVCConfig.java=UTF-8
 encoding//src/main/java/cn/com/doit/util/FiledToShow.java=UTF-8
+encoding//src/main/resources=UTF-8
 encoding//src/main/resources/static/resources/css/login.css=gbk
+encoding//src/test/java=UTF-8
+encoding//src/test/resources=UTF-8
 encoding/<project>=UTF-8
 encoding/application.properties=UTF-8
 encoding/crypyo.properties=UTF-8

@@ -48,7 +48,7 @@ public class AerospikeClientConfig implements ExitCodeGenerator{
 	@Bean(name = "writePolicy")
 	public WritePolicy writePolicy() {
 		WritePolicy policy = new WritePolicy();
-		policy.timeout = timeout;// 写入超时 单位毫秒
+		policy.timeoutDelay = timeout;// 写入超时 单位毫秒
 		policy.expiration = expiration;// 过期时间60s
 		return policy;
 	}
@@ -56,7 +56,7 @@ public class AerospikeClientConfig implements ExitCodeGenerator{
 	@Bean(name = "readPolicy")
 	public Policy readPolicy() {
 		Policy policy = new Policy();
-		policy.timeout = timeout;// 写入超时 单位毫秒
+		policy.timeoutDelay = timeout;// 写入超时 单位毫秒
 		return policy;
 	}
 

@@ -32,7 +32,7 @@ public class AerospikeClientTest {
 	public void writeSingleValue(AerospikeClient as) {
 		// 设置写入策略
 		WritePolicy policy = new WritePolicy();
-		policy.timeout = 50;// 写入超时 单位毫秒
+		policy.timeoutDelay = 50;// 写入超时 单位毫秒
 		// policy.sendKey=true;
 
 		// 构造key和record
@@ -92,7 +92,7 @@ public class AerospikeClientTest {
 	public void readSingelRecord(AerospikeClient as) {
 		// Read All Bins in a Record 读取记录中所有的bins
 		Policy policy = new Policy();
-		policy.timeout = 50;
+		policy.timeoutDelay = 50;
 		Key readKey = new Key("doit", "login", "张三");
 		Record red = as.get(policy, readKey);
 		System.out.println(red.toString());
@@ -105,7 +105,7 @@ public class AerospikeClientTest {
 	// Delete a Record
 	public void deletSingelRecord(AerospikeClient as) {
 		WritePolicy policy = new WritePolicy();
-		policy.timeout = 50;
+		policy.timeoutDelay = 50;
 		policy.durableDelete = false;
 		Key key = new Key("doit", "login", "张三");
 		as.delete(policy, key);
@@ -121,7 +121,7 @@ public class AerospikeClientTest {
 	// To delete a bin, set the bin value to NULL:
 	public void deletSingelBin(AerospikeClient as) {
 		WritePolicy policy = new WritePolicy();
-		policy.timeout = 50;
+		policy.timeoutDelay = 50;
 		policy.durableDelete = false;
 		Key wkey = new Key("doit", "login", "李四");
 		Bin bins = Bin.asNull("key");
@@ -132,7 +132,7 @@ public class AerospikeClientTest {
 	/** 批量读取 */
 	public void readMultipleRecord(AerospikeClient as) {
 		BatchPolicy policy = new BatchPolicy();
-		policy.timeout = 50;
+		policy.timeoutDelay = 50;
 		Key[] keys = new Key[2];
 		String[] mykeys = new String[2];
 		mykeys[0] = "张三";
@@ -173,7 +173,7 @@ public class AerospikeClientTest {
 		 * record.(目前还不知道具体作用) Generation and time-to-live are updated.
 		 */
 		WritePolicy write = new WritePolicy();
-		write.timeout = 100;
+		write.timeoutDelay = 100;
 		Key key = new Key("doit", "login", "张三");
 		Key shkey = new Key("doit", "login", "李四");
 		Bin bin = new Bin("age", 15);
